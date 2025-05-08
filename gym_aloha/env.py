@@ -3,7 +3,7 @@ import numpy as np
 from dm_control import mujoco
 from dm_control.rl import control
 from gymnasium import spaces
-
+from mujoco import viewer as mj_viewer
 from gym_aloha.constants import (
     ACTIONS,
     ASSETS_DIR,
@@ -53,7 +53,19 @@ class AlohaEnv(gym.Env):
         elif self.obs_type == "pixels":
             self.observation_space = spaces.Dict(
                 {
-                    "top": spaces.Box(
+                    "overhead_cam": spaces.Box(
+                        low=0,
+                        high=255,
+                        shape=(self.observation_height, self.observation_width, 3),
+                        dtype=np.uint8,
+                    ),
+                    "wrist_cam_left": spaces.Box(
+                        low=0,
+                        high=255,
+                        shape=(self.observation_height, self.observation_width, 3),
+                        dtype=np.uint8,
+                    ),
+                    "wrist_cam_right": spaces.Box(
                         low=0,
                         high=255,
                         shape=(self.observation_height, self.observation_width, 3),
@@ -66,12 +78,24 @@ class AlohaEnv(gym.Env):
                 {
                     "pixels": spaces.Dict(
                         {
-                            "top": spaces.Box(
-                                low=0,
-                                high=255,
-                                shape=(self.observation_height, self.observation_width, 3),
-                                dtype=np.uint8,
-                            )
+                             "overhead_cam": spaces.Box(
+                        low=0,
+                        high=255,
+                        shape=(self.observation_height, self.observation_width, 3),
+                        dtype=np.uint8,
+                    ),
+                    "wrist_cam_left": spaces.Box(
+                        low=0,
+                        high=255,
+                        shape=(self.observation_height, self.observation_width, 3),
+                        dtype=np.uint8,
+                    ),
+                    "wrist_cam_right": spaces.Box(
+                        low=0,
+                        high=255,
+                        shape=(self.observation_height, self.observation_width, 3),
+                        dtype=np.uint8,
+                    )
                         }
                     ),
                     "agent_pos": spaces.Box(
@@ -84,6 +108,17 @@ class AlohaEnv(gym.Env):
             )
 
         self.action_space = spaces.Box(low=-1, high=1, shape=(len(ACTIONS),), dtype=np.float32)
+
+        model = self._env.physics.model.ptr
+        data = self._env.physics.data.ptr
+
+        self.viewer = mj_viewer.launch_passive(
+        model=model,
+        data=data,
+    )
+
+
+
 
     def render(self):
         return self._render(visualize=True)
@@ -102,7 +137,10 @@ class AlohaEnv(gym.Env):
         # else:
         #     raise ValueError(mode)
         # TODO(rcadene): render and visualizer several cameras (e.g. angle, front_close)
-        image = self._env.physics.render(height=height, width=width, camera_id="top")
+        image = { "overhead_cam":self._env.physics.render(height=height, width=width, camera_id="overhead_cam"),
+                 "wrist_cam_left":self._env.physics.render(height=height, width=width, camera_id="wrist_cam_left"),
+                 "wrist_cam_right":self._env.physics.render(height=height, width=width, camera_id="wrist_cam_right"),
+        }
         return image
 
     def _make_env_task(self, task_name):
@@ -139,10 +177,12 @@ class AlohaEnv(gym.Env):
         if self.obs_type == "state":
             raise NotImplementedError()
         elif self.obs_type == "pixels":
-            obs = {"top": raw_obs["images"]["top"].copy()}
+            obs = {"overhead_cam": raw_obs["images"]["overhead_cam"].copy(), "wrist_cam_left": raw_obs["images"]["wrist_cam_left"].copy()
+                   ,"wrist_cam_right": raw_obs["images"]["wrist_cam_right"].copy()}
         elif self.obs_type == "pixels_agent_pos":
             obs = {
-                "pixels": {"top": raw_obs["images"]["top"].copy()},
+                "pixels": {"overhead_cam": raw_obs["images"]["overhead_cam"].copy(), "wrist_cam_left": raw_obs["images"]["wrist_cam_left"].copy()
+                   ,"wrist_cam_right": raw_obs["images"]["wrist_cam_right"].copy()},
                 "agent_pos": raw_obs["qpos"],
             }
         return obs
@@ -168,6 +208,7 @@ class AlohaEnv(gym.Env):
         observation = self._format_raw_obs(raw_obs.observation)
 
         info = {"is_success": False}
+        self.viewer.sync()
         return observation, info
 
     def step(self, action):
@@ -175,6 +216,7 @@ class AlohaEnv(gym.Env):
         # TODO(rcadene): add info["is_success"] and info["success"] ?
 
         _, reward, _, raw_obs = self._env.step(action)
+        self.viewer.sync()
 
         # TODO(rcadene): add an enum
         terminated = is_success = reward == 4

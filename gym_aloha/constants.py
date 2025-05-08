@@ -55,15 +55,15 @@ START_ARM_POSE = [
     -0.3,
     0,
     0.02239,
-    -0.02239,
+    #0.02239,
     0,
     -0.96,
     1.16,
     0,
     -0.3,
     0,
-    0.02239,
-    -0.02239,
+    1#0.02239,
+    #0.02239,
 ]
 
 ASSETS_DIR = Path(__file__).parent.resolve() / "assets"  # note: absolute path

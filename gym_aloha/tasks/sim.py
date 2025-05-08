@@ -44,8 +44,8 @@ class BimanualViperXTask(base.Task):
         left_gripper_action = unnormalize_puppet_gripper_position(normalized_left_gripper_action)
         right_gripper_action = unnormalize_puppet_gripper_position(normalized_right_gripper_action)
 
-        full_left_gripper_action = [left_gripper_action, -left_gripper_action]
-        full_right_gripper_action = [right_gripper_action, -right_gripper_action]
+        full_left_gripper_action = [left_gripper_action]
+        full_right_gripper_action = [right_gripper_action]
 
         env_action = np.concatenate(
             [left_arm_action, full_left_gripper_action, right_arm_action, full_right_gripper_action]
@@ -89,9 +89,9 @@ class BimanualViperXTask(base.Task):
         obs["qvel"] = self.get_qvel(physics)
         obs["env_state"] = self.get_env_state(physics)
         obs["images"] = {}
-        obs["images"]["top"] = physics.render(height=480, width=640, camera_id="top")
-        obs["images"]["angle"] = physics.render(height=480, width=640, camera_id="angle")
-        obs["images"]["vis"] = physics.render(height=480, width=640, camera_id="front_close")
+        obs["images"]["overhead_cam"] = physics.render(height=224, width=224, camera_id="overhead_cam")
+        obs["images"]["wrist_cam_left"] = physics.render(height=224, width=224, camera_id="wrist_cam_left")
+        obs["images"]["wrist_cam_right"] = physics.render(height=224, width=224, camera_id="wrist_cam_right")
 
         return obs
 
@@ -110,7 +110,7 @@ class TransferCubeTask(BimanualViperXTask):
         # TODO Notice: this function does not randomize the env configuration. Instead, set BOX_POSE from outside
         # reset qpos, control and box position
         with physics.reset_context():
-            physics.named.data.qpos[:16] = START_ARM_POSE
+            physics.named.data.qpos[:14] = START_ARM_POSE
             np.copyto(physics.data.ctrl, START_ARM_POSE)
             assert BOX_POSE[0] is not None
             physics.named.data.qpos[-7:] = BOX_POSE[0]
@@ -159,7 +159,7 @@ class InsertionTask(BimanualViperXTask):
         # TODO Notice: this function does not randomize the env configuration. Instead, set BOX_POSE from outside
         # reset qpos, control and box position
         with physics.reset_context():
-            physics.named.data.qpos[:16] = START_ARM_POSE
+            physics.named.data.qpos[:14] = START_ARM_POSE
             np.copyto(physics.data.ctrl, START_ARM_POSE)
             assert BOX_POSE[0] is not None
             physics.named.data.qpos[-7 * 2 :] = BOX_POSE[0]  # two objects
