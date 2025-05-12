@@ -27,10 +27,10 @@ class AlohaEnv(gym.Env):
         task,
         obs_type="pixels",
         render_mode="rgb_array",
-        observation_width=640,
-        observation_height=480,
-        visualization_width=640,
-        visualization_height=480,
+        observation_width=224,
+        observation_height=224,
+        visualization_width=224,
+        visualization_height=224,
     ):
         super().__init__()
         self.task = task

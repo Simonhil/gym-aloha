@@ -110,7 +110,9 @@ class TransferCubeTask(BimanualViperXTask):
         # TODO Notice: this function does not randomize the env configuration. Instead, set BOX_POSE from outside
         # reset qpos, control and box position
         with physics.reset_context():
-            physics.named.data.qpos[:14] = START_ARM_POSE
+            #physics.named.data.qpos[:14] = START_ARM_POSE
+            physics.named.data.qpos[:7] = START_ARM_POSE[:7]
+            physics.named.data.qpos[8:15] = START_ARM_POSE[7:]
             np.copyto(physics.data.ctrl, START_ARM_POSE)
             assert BOX_POSE[0] is not None
             physics.named.data.qpos[-7:] = BOX_POSE[0]

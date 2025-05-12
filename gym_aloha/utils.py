@@ -2,8 +2,8 @@ import numpy as np
 
 
 def sample_box_pose(seed=None):
-    x_range = [0.0, 0.2]
-    y_range = [0.4, 0.6]
+    x_range = [-0.1, 0.1]
+    y_range = [-0.1, 0.1]
     z_range = [0.05, 0.05]
 
     rng = np.random.RandomState(seed)
