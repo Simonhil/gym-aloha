@@ -64,7 +64,13 @@ PUPPET_GRIPPER_JOINT_OPEN = 1.4910
 PUPPET_GRIPPER_JOINT_CLOSE = -0.6213
 
 MASTER_GRIPPER_JOINT_MID = (MASTER_GRIPPER_JOINT_OPEN + MASTER_GRIPPER_JOINT_CLOSE) / 2
-
+###########################Block Transfer###################
+BLOCK_NAMES = [
+    'box_1', 
+    "rectangle_1",
+    "rectangle_2",
+    "rectangle_3"
+]
 ############################ Helper functions ############################
 
 

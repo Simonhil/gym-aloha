@@ -1,3 +1,4 @@
+import random
 import gymnasium as gym
 import numpy as np
 from dm_control import mujoco
@@ -7,10 +8,11 @@ from mujoco import viewer as mj_viewer
 from gym_aloha.constants import (
     ACTIONS,
     ASSETS_DIR,
+    BLOCK_NAMES,
     DT,
     JOINTS,
 )
-from gym_aloha.tasks.sim import BOX_POSE, InsertionTask, TransferCubeTask
+from gym_aloha.tasks.sim import BOX_POSE, BlockStackingTask, InsertionTask, TransferCubeTask
 from gym_aloha.tasks.sim_end_effector import (
     InsertionEndEffectorTask,
     TransferCubeEndEffectorTask,
@@ -155,6 +157,22 @@ class AlohaEnv(gym.Env):
             xml_path = ASSETS_DIR / "bimanual_viperx_insertion.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
             task = InsertionTask()
+
+
+        elif task_name == "block_stacking":
+            xml_path = ASSETS_DIR / "bimanual_viperx_block stacking.xml"
+            physics = mujoco.Physics.from_xml_path(str(xml_path))
+            task = BlockStackingTask()
+            hole_num = random.randint(2, 65)
+
+            #body_id = physics.model.name2id(f"peg{hole_num}", 'body')
+
+            # # # Hide it (alpha = 0)
+            # #physics.model.geom_rgba[geom_id][3] = 0.0
+
+            # # # Disable collisions by moving it far away
+            #physics.model.body_pos[body_id] = [0, 0, 1]
+
         elif task_name == "end_effector_transfer_cube":
             raise NotImplementedError()
             xml_path = ASSETS_DIR / "bimanual_viperx_end_effector_transfer_cube.xml"
@@ -165,6 +183,17 @@ class AlohaEnv(gym.Env):
             xml_path = ASSETS_DIR / "bimanual_viperx_end_effector_insertion.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
             task = InsertionEndEffectorTask()
+        elif task_name == "test":
+            xml_path = ASSETS_DIR / "bimanual_viperx_ball_maze.xml"
+            physics = mujoco.Physics.from_xml_path(str(xml_path))
+            task = TransferCubeTask()
+            # body_id = physics.model.name2id('blue', 'body')
+
+            # # # Hide it (alpha = 0)
+            # #physics.model.geom_rgba[geom_id][3] = 0.0
+
+            # # # Disable collisions by moving it far away
+            # physics.model.body_pos[body_id] = [0, 0, 1]
         else:
             raise NotImplementedError(task_name)
 
@@ -197,9 +226,15 @@ class AlohaEnv(gym.Env):
 
         # TODO(rcadene): do not use global variable for this
         if self.task == "transfer_cube":
-            BOX_POSE[0] = sample_box_pose(seed)  # used in sim reset
+             BOX_POSE.append(sample_box_pose(seed))  # used in sim reset
         elif self.task == "insertion":
-            BOX_POSE[0] = np.concatenate(sample_insertion_pose(seed))  # used in sim reset
+            BOX_POSE.append(np.concatenate(sample_insertion_pose(seed)))  # used in sim reset
+        elif self.task == "test":
+            BOX_POSE.append(sample_box_pose(seed))  # used in sim reset
+        elif self.task == "block_stacking":
+            for i in range(len(BLOCK_NAMES)):
+                BOX_POSE.append(sample_box_pose(seed)) # used in sim reset
+                print(BOX_POSE)
         else:
             raise ValueError(self.task)
 

@@ -1,0 +1,307 @@
+<mujoco>
+    <include file="scene.xml"/>
+    <asset>
+
+    <mesh name="board" file="maze_assets/maze_board.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg2" file="maze_assets/pegs/Part Studio 1 - Part 2.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg3" file="maze_assets/pegs/Part Studio 1 - Part 3.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg4" file="maze_assets/pegs/Part Studio 1 - Part 4.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg5" file="maze_assets/pegs/Part Studio 1 - Part 5.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg6" file="maze_assets/pegs/Part Studio 1 - Part 6.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg7" file="maze_assets/pegs/Part Studio 1 - Part 7.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg8" file="maze_assets/pegs/Part Studio 1 - Part 8.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg9" file="maze_assets/pegs/Part Studio 1 - Part 9.stl" scale="0.001 0.001 0.001"/> 
+    <mesh name="peg10" file="maze_assets/pegs/Part Studio 1 - Part 10.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg11" file="maze_assets/pegs/Part Studio 1 - Part 11.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg12" file="maze_assets/pegs/Part Studio 1 - Part 12.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg13" file="maze_assets/pegs/Part Studio 1 - Part 13.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg14" file="maze_assets/pegs/Part Studio 1 - Part 14.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg15" file="maze_assets/pegs/Part Studio 1 - Part 15.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg16" file="maze_assets/pegs/Part Studio 1 - Part 16.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg17" file="maze_assets/pegs/Part Studio 1 - Part 17.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg18" file="maze_assets/pegs/Part Studio 1 - Part 18.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg19" file="maze_assets/pegs/Part Studio 1 - Part 19.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg20" file="maze_assets/pegs/Part Studio 1 - Part 20.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg21" file="maze_assets/pegs/Part Studio 1 - Part 21.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg22" file="maze_assets/pegs/Part Studio 1 - Part 22.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg23" file="maze_assets/pegs/Part Studio 1 - Part 23.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg24" file="maze_assets/pegs/Part Studio 1 - Part 24.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg25" file="maze_assets/pegs/Part Studio 1 - Part 25.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg26" file="maze_assets/pegs/Part Studio 1 - Part 26.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg27" file="maze_assets/pegs/Part Studio 1 - Part 27.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg28" file="maze_assets/pegs/Part Studio 1 - Part 28.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg29" file="maze_assets/pegs/Part Studio 1 - Part 29.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg30" file="maze_assets/pegs/Part Studio 1 - Part 30.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg31" file="maze_assets/pegs/Part Studio 1 - Part 31.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg32" file="maze_assets/pegs/Part Studio 1 - Part 32.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg33" file="maze_assets/pegs/Part Studio 1 - Part 33.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg34" file="maze_assets/pegs/Part Studio 1 - Part 34.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg35" file="maze_assets/pegs/Part Studio 1 - Part 35.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg36" file="maze_assets/pegs/Part Studio 1 - Part 36.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg37" file="maze_assets/pegs/Part Studio 1 - Part 37.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg38" file="maze_assets/pegs/Part Studio 1 - Part 38.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg39" file="maze_assets/pegs/Part Studio 1 - Part 39.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg40" file="maze_assets/pegs/Part Studio 1 - Part 40.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg41" file="maze_assets/pegs/Part Studio 1 - Part 41.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg42" file="maze_assets/pegs/Part Studio 1 - Part 42.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg43" file="maze_assets/pegs/Part Studio 1 - Part 43.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg44" file="maze_assets/pegs/Part Studio 1 - Part 44.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg45" file="maze_assets/pegs/Part Studio 1 - Part 45.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg46" file="maze_assets/pegs/Part Studio 1 - Part 46.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg47" file="maze_assets/pegs/Part Studio 1 - Part 47.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg48" file="maze_assets/pegs/Part Studio 1 - Part 48.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg49" file="maze_assets/pegs/Part Studio 1 - Part 49.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg50" file="maze_assets/pegs/Part Studio 1 - Part 50.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg51" file="maze_assets/pegs/Part Studio 1 - Part 51.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg52" file="maze_assets/pegs/Part Studio 1 - Part 52.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg53" file="maze_assets/pegs/Part Studio 1 - Part 53.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg54" file="maze_assets/pegs/Part Studio 1 - Part 54.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg55" file="maze_assets/pegs/Part Studio 1 - Part 55.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg56" file="maze_assets/pegs/Part Studio 1 - Part 56.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg57" file="maze_assets/pegs/Part Studio 1 - Part 57.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg58" file="maze_assets/pegs/Part Studio 1 - Part 58.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg59" file="maze_assets/pegs/Part Studio 1 - Part 59.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg60" file="maze_assets/pegs/Part Studio 1 - Part 60.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg61" file="maze_assets/pegs/Part Studio 1 - Part 61.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg62" file="maze_assets/pegs/Part Studio 1 - Part 62.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg63" file="maze_assets/pegs/Part Studio 1 - Part 63.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg64" file="maze_assets/pegs/Part Studio 1 - Part 64.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="peg65" file="maze_assets/pegs/Part Studio 1 - Part 65.stl" scale="0.001 0.001 0.001"/>
+
+    </asset>
+
+
+
+    <worldbody>
+        <body name="board" pos="0 0.05 0.1">
+            <joint name="board_joint" type="free" frictionloss="0.01" />
+            <inertial pos="0 0 0" mass="0.05" diaginertia="0.002 0.002 0.002" />
+            <body name="maze_board" >
+                <geom type="mesh" mesh="board" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg2">
+                <geom type="mesh" mesh="peg2" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg3">
+                <geom type="mesh" mesh="peg3" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg4">
+                <geom type="mesh" mesh="peg4" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg5">
+                <geom type="mesh" mesh="peg5" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg6">
+                <geom type="mesh" mesh="peg6" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg7">
+                <geom type="mesh" mesh="peg7" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg8">
+                <geom type="mesh" mesh="peg8" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg9">
+                <geom type="mesh" mesh="peg9" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg10">
+                <geom type="mesh" mesh="peg10" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg11">
+                <geom type="mesh" mesh="peg11" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg12">
+                <geom type="mesh" mesh="peg12" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg13">
+                <geom type="mesh" mesh="peg13" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg14">
+                <geom type="mesh" mesh="peg14" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg15">
+                <geom type="mesh" mesh="peg15" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg16">
+                <geom type="mesh" mesh="peg16" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg17">
+                <geom type="mesh" mesh="peg17" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg18">
+                <geom type="mesh" mesh="peg18" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg19">
+                <geom type="mesh" mesh="peg19" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg20">
+                <geom type="mesh" mesh="peg20" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg21">
+                <geom type="mesh" mesh="peg21" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg22">
+                <geom type="mesh" mesh="peg22" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg23">
+                <geom type="mesh" mesh="peg23" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg24">
+                <geom type="mesh" mesh="peg24" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg25">
+                <geom type="mesh" mesh="peg25" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg26">
+                <geom type="mesh" mesh="peg26" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg27">
+                <geom type="mesh" mesh="peg27" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg28">
+                <geom type="mesh" mesh="peg28" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg29">
+                <geom type="mesh" mesh="peg29" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg30">
+                <geom type="mesh" mesh="peg30" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg31">
+                <geom type="mesh" mesh="peg31" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg32">
+                <geom type="mesh" mesh="peg32" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg33">
+                <geom type="mesh" mesh="peg33" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg34">
+                <geom type="mesh" mesh="peg34" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg35">
+                <geom type="mesh" mesh="peg35" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg36">
+                <geom type="mesh" mesh="peg36" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg37">
+                <geom type="mesh" mesh="peg37" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg38">
+                <geom type="mesh" mesh="peg38" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg39">
+                <geom type="mesh" mesh="peg39" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg40">
+                <geom type="mesh" mesh="peg40" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg41">
+                <geom type="mesh" mesh="peg41" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg42">
+                <geom type="mesh" mesh="peg42" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg43">
+                <geom type="mesh" mesh="peg43" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg44">
+                <geom type="mesh" mesh="peg44" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg45">
+                <geom type="mesh" mesh="peg45" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg46">
+                <geom type="mesh" mesh="peg46" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg47">
+                <geom type="mesh" mesh="peg47" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg48">
+                <geom type="mesh" mesh="peg48" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg49">
+                <geom type="mesh" mesh="peg49" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg50">
+                <geom type="mesh" mesh="peg50" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg51">
+                <geom type="mesh" mesh="peg51" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg52">
+                <geom type="mesh" mesh="peg52" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg53">
+                <geom type="mesh" mesh="peg53" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg54">
+                <geom type="mesh" mesh="peg54" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg55">
+                <geom type="mesh" mesh="peg55" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg56">
+                <geom type="mesh" mesh="peg56" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg57">
+                <geom type="mesh" mesh="peg57" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg58">
+                <geom type="mesh" mesh="peg58" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg59">
+                <geom type="mesh" mesh="peg59" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg60">
+                <geom type="mesh" mesh="peg60" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg61">
+                <geom type="mesh" mesh="peg61" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg62">
+                <geom type="mesh" mesh="peg62" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg63">
+                <geom type="mesh" mesh="peg63" contype="1" conaffinity="1"/>
+            </body>
+            <body name="peg64">
+                <geom type="mesh" mesh="peg64" contype="1" conaffinity="1"/>
+            </body>
+             <body name="peg65">
+                <geom type="mesh" mesh="peg65" contype="1" conaffinity="1"/>
+            </body>
+
+            
+        </body>
+
+
+    </worldbody>
+
+    <actuator>
+        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="left/waist" kp="800"  user="1" forcelimited="true" forcerange="-150 150"/>
+        <position ctrllimited="true" ctrlrange="-1.85005 1.25664" joint="left/shoulder" kp="1600"  user="1" forcelimited="true" forcerange="-300 300"/>
+        <position ctrllimited="true" ctrlrange="-1.76278 1.6057" joint="left/elbow" kp="800"  user="1" forcelimited="true" forcerange="-100 100"/>
+        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="left/forearm_roll" kp="10"  user="1" forcelimited="true" forcerange="-100 100"/>
+        <position ctrllimited="true" ctrlrange="-1.8675 2.23402" joint="left/wrist_angle" kp="50"  user="1"/>
+        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="left/wrist_rotate" kp="20"  user="1"/>
+        <position ctrllimited="true" ctrlrange="0.021 0.057" joint="left/left_finger" kp="200"  user="1"/>
+        <!position ctrllimited="true" ctrlrange="-0.057 -0.021" joint="left/right_finger" kp="200"  user="1"/>
+
+        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="right/waist" kp="800"  user="1" forcelimited="true" forcerange="-150 150"/>
+        <position ctrllimited="true" ctrlrange="-1.85005 1.25664" joint="right/shoulder" kp="1600"  user="1" forcelimited="true" forcerange="-300 300"/>
+        <position ctrllimited="true" ctrlrange="-1.76278 1.6057" joint="right/elbow" kp="800"  user="1" forcelimited="true" forcerange="-100 100"/>
+        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="right/forearm_roll" kp="10"  user="1" forcelimited="true" forcerange="-100 100"/>
+        <position ctrllimited="true" ctrlrange="-1.8675 2.23402" joint="right/wrist_angle" kp="50"  user="1"/>
+        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="right/wrist_rotate" kp="20"  user="1"/>
+        <position ctrllimited="true" ctrlrange="0.021 0.057" joint="right/left_finger" kp="200"  user="1"/>
+        <!osition ctrllimited="true" ctrlrange="-0.057 -0.021" joint="vx300s_right/right_finger" kp="200"  user="1"/> 
+
+    </actuator>
+
+    <keyframe>
+        <!key qpos="0 -0.96 1.16 0 -0.3 0 0.024 -0.024  0 -0.96 1.16 0 -0.3 0 0.024 -0.024"/>
+    </keyframe>
+
+
+</mujoco>
