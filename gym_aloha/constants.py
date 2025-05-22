@@ -71,6 +71,21 @@ BLOCK_NAMES = [
     "rectangle_2",
     "rectangle_3"
 ]
+
+
+
+############################Ball Maze###################
+NUMBER_BOARDS=1
+
+SELECTED_BOARD=1
+
+###########################Peg construction#####################
+BODY_NAMES_PEG_CONSTRUCTION=[
+    "socket",
+    "board",
+    "peg"
+]
+
 ############################ Helper functions ############################
 
 

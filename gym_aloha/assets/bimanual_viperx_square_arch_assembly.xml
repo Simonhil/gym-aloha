@@ -1,0 +1,274 @@
+<mujoco>
+    <include file="scene.xml"/>
+    <asset>
+    <!-- socket -->
+    <mesh name="socket1" file="Insertion_elements/hole_socket/Part Studio 1 - Part 1.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="socket2" file="Insertion_elements/hole_socket/Part Studio 1 - Part 2.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="socket3" file="Insertion_elements/hole_socket/Part Studio 1 - Part 3.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="socket4" file="Insertion_elements/hole_socket/Part Studio 1 - Part 4.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="socket5" file="Insertion_elements/hole_socket/Part Studio 1 - Part 5.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="socket6" file="Insertion_elements/hole_socket/Part Studio 1 - Part 6.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="socket7" file="Insertion_elements/hole_socket/Part Studio 1 - Part 7.stl" scale="0.001 0.001 0.001"/>
+   
+   <!-- head -->
+        <mesh name="head1" file="Insertion_elements/arch_head/Part Studio 1 - Part 9.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head2" file="Insertion_elements/arch_head/Part Studio 1 - Part 10.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head3" file="Insertion_elements/arch_head/Part Studio 1 - Part 11.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head4" file="Insertion_elements/arch_head/Part Studio 1 - Part 12.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head5" file="Insertion_elements/arch_head/Part Studio 1 - Part 13.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head6" file="Insertion_elements/arch_head/Part Studio 1 - Part 14.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head7" file="Insertion_elements/arch_head/Part Studio 1 - Part 15.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head8" file="Insertion_elements/arch_head/Part Studio 1 - Part 16.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head9" file="Insertion_elements/arch_head/Part Studio 1 - Part 17.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head10" file="Insertion_elements/arch_head/Part Studio 1 - Part 18.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head11" file="Insertion_elements/arch_head/Part Studio 1 - Part 19.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head12" file="Insertion_elements/arch_head/Part Studio 1 - Part 20.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head13" file="Insertion_elements/arch_head/Part Studio 1 - Part 21.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head14" file="Insertion_elements/arch_head/Part Studio 1 - Part 22.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head15" file="Insertion_elements/arch_head/Part Studio 1 - Part 23.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head16" file="Insertion_elements/arch_head/Part Studio 1 - Part 24.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head17" file="Insertion_elements/arch_head/Part Studio 1 - Part 25.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head18" file="Insertion_elements/arch_head/Part Studio 1 - Part 26.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head19" file="Insertion_elements/arch_head/Part Studio 1 - Part 27.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head20" file="Insertion_elements/arch_head/Part Studio 1 - Part 28.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head21" file="Insertion_elements/arch_head/Part Studio 1 - Part 29.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head22" file="Insertion_elements/arch_head/Part Studio 1 - Part 30.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head23" file="Insertion_elements/arch_head/Part Studio 1 - Part 31.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="head24" file="Insertion_elements/arch_head/Part Studio 1 - Part 32.stl" scale="0.001 0.001 0.001"/>
+
+    
+    <!-- pegs -->
+        <mesh name="hex_peg" file="Insertion_elements/hex_peg_25mm.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="squere_peg" file="Insertion_elements/straight_square_peg_60mm.stl" scale="0.001 0.001 0.001"/>
+
+    </asset>
+       
+
+
+
+
+    <worldbody>
+        <body name="socket1" pos="0 0.05 0.07">
+            <joint name="socket1_joint" type="free" frictionloss="0.01" />
+            <inertial pos="0 0 0" mass="0.09" diaginertia="0.0002 0.0002 0.0002" />
+            <geom type="mesh" mesh="socket1" class="visual"/>
+            <geom type="mesh" mesh="socket1" class="collision"/>
+            <geom type="mesh" mesh="socket2" class="visual"/>
+            <geom type="mesh" mesh="socket2" class="collision"/>
+            <geom type="mesh" mesh="socket3" class="visual"/>
+            <geom type="mesh" mesh="socket3" class="collision"/>
+            <geom type="mesh" mesh="socket4" class="visual"/>
+            <geom type="mesh" mesh="socket4" class="collision"/>
+            <geom type="mesh" mesh="socket5" class="visual"/>
+            <geom type="mesh" mesh="socket5" class="collision"/>
+            <geom type="mesh" mesh="socket6" class="visual"/>
+            <geom type="mesh" mesh="socket6" class="collision"/>
+            <geom type="mesh" mesh="socket7" class="visual"/>
+            <geom type="mesh" mesh="socket7" class="collision"/>
+        </body>
+
+        <body name="socket2" pos="0 0.1 0.07">
+            <joint name="socket2_joint" type="free" frictionloss="0.01" />
+            <inertial pos="0 0 0" mass="0.09" diaginertia="0.0002 0.0002 0.0002" />
+            <geom type="mesh" mesh="socket1" class="visual"/>
+            <geom type="mesh" mesh="socket1" class="collision"/>
+            <geom type="mesh" mesh="socket2" class="visual"/>
+            <geom type="mesh" mesh="socket2" class="collision"/>
+            <geom type="mesh" mesh="socket3" class="visual"/>
+            <geom type="mesh" mesh="socket3" class="collision"/>
+            <geom type="mesh" mesh="socket4" class="visual"/>
+            <geom type="mesh" mesh="socket4" class="collision"/>
+            <geom type="mesh" mesh="socket5" class="visual"/>
+            <geom type="mesh" mesh="socket5" class="collision"/>
+            <geom type="mesh" mesh="socket6" class="visual"/>
+            <geom type="mesh" mesh="socket6" class="collision"/>
+            <geom type="mesh" mesh="socket7" class="visual"/>
+            <geom type="mesh" mesh="socket7" class="collision"/>
+        </body>
+
+        <body name="head1" pos="0.08 0 0.05">
+            <joint name="head1_joint" type="free" frictionloss="0.01" />
+            <inertial pos="0 0 0" mass="0.01" diaginertia="0.0002 0.0002 0.0002" />
+            <geom type="mesh" mesh="head1" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head1" class="collision"/>
+
+            <geom type="mesh" mesh="head2" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head2" class="collision"/>
+
+            <geom type="mesh" mesh="head3" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head3" class="collision"/>
+
+            <geom type="mesh" mesh="head5" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head5" class="collision"/>
+
+            <geom type="mesh" mesh="head6" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head6" class="collision"/>
+
+            <geom type="mesh" mesh="head7" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head7" class="collision"/>
+
+            <geom type="mesh" mesh="head8" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head8" class="collision"/>
+
+            <geom type="mesh" mesh="head9" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head9" class="collision"/>
+
+            <geom type="mesh" mesh="head10" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head10" class="collision"/>
+
+            <geom type="mesh" mesh="head11" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head11" class="collision"/>
+
+            <geom type="mesh" mesh="head12" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head12" class="collision"/>
+
+            <geom type="mesh" mesh="head13" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head13" class="collision"/>
+
+            <geom type="mesh" mesh="head14" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head14" class="collision"/>
+
+            <geom type="mesh" mesh="head15" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head15" class="collision"/>
+
+            <geom type="mesh" mesh="head16" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head16" class="collision"/>
+
+            <geom type="mesh" mesh="head17" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head17" class="collision"/>
+
+            <geom type="mesh" mesh="head18" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head18" class="collision"/>
+
+            <geom type="mesh" mesh="head19" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head19" class="collision"/>
+
+            <geom type="mesh" mesh="head20" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head20" class="collision"/>
+
+            <geom type="mesh" mesh="head21" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head21" class="collision"/>
+
+            <geom type="mesh" mesh="head22" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head22" class="collision"/>
+
+            <geom type="mesh" mesh="head23" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head23" class="collision"/>
+
+            <geom type="mesh" mesh="head24" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head24" class="collision"/>
+
+            <geom type="mesh" mesh="hex_peg" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="hex_peg" class="collision"/>
+
+
+        </body>
+        <body name="head2" pos="-0.08 0 0.05">
+            <joint name="head2_joint" type="free" frictionloss="0.01" />
+            <inertial pos="0 0 0" mass="0.01" diaginertia="0.0002 0.0002 0.0002" />
+            <geom type="mesh" mesh="head1" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head1" class="collision"/>
+
+            <geom type="mesh" mesh="head2" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head2" class="collision"/>
+
+            <geom type="mesh" mesh="head3" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head3" class="collision"/>
+
+            <geom type="mesh" mesh="head5" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head5" class="collision"/>
+
+            <geom type="mesh" mesh="head6" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head6" class="collision"/>
+
+            <geom type="mesh" mesh="head7" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head7" class="collision"/>
+
+            <geom type="mesh" mesh="head8" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head8" class="collision"/>
+
+            <geom type="mesh" mesh="head9" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head9" class="collision"/>
+
+            <geom type="mesh" mesh="head10" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head10" class="collision"/>
+
+            <geom type="mesh" mesh="head11" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head11" class="collision"/>
+
+            <geom type="mesh" mesh="head12" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head12" class="collision"/>
+
+            <geom type="mesh" mesh="head13" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head13" class="collision"/>
+
+            <geom type="mesh" mesh="head14" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head14" class="collision"/>
+
+            <geom type="mesh" mesh="head15" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head15" class="collision"/>
+
+            <geom type="mesh" mesh="head16" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head16" class="collision"/>
+
+            <geom type="mesh" mesh="head17" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head17" class="collision"/>
+
+            <geom type="mesh" mesh="head18" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head18" class="collision"/>
+
+            <geom type="mesh" mesh="head19" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head19" class="collision"/>
+
+            <geom type="mesh" mesh="head20" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head20" class="collision"/>
+
+            <geom type="mesh" mesh="head21" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head21" class="collision"/>
+
+            <geom type="mesh" mesh="head22" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head22" class="collision"/>
+
+            <geom type="mesh" mesh="head23" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head23" class="collision"/>
+
+            <geom type="mesh" mesh="head24" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="head24" class="collision"/>
+
+            <geom type="mesh" mesh="hex_peg" rgba="1 0.5 0 1"/>
+            <geom type="mesh" mesh="hex_peg" class="collision"/>
+
+            <geom type="mesh" mesh="squere_peg" rgba="0.5 1 0 1"/>
+            <geom type="mesh" mesh="squere_peg" class="collision"/>
+
+        </body>
+
+    </worldbody>
+
+    <actuator>
+        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="left/waist" kp="800"  user="1" forcelimited="true" forcerange="-150 150"/>
+        <position ctrllimited="true" ctrlrange="-1.85005 1.25664" joint="left/shoulder" kp="1600"  user="1" forcelimited="true" forcerange="-300 300"/>
+        <position ctrllimited="true" ctrlrange="-1.76278 1.6057" joint="left/elbow" kp="800"  user="1" forcelimited="true" forcerange="-100 100"/>
+        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="left/forearm_roll" kp="10"  user="1" forcelimited="true" forcerange="-100 100"/>
+        <position ctrllimited="true" ctrlrange="-1.8675 2.23402" joint="left/wrist_angle" kp="50"  user="1"/>
+        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="left/wrist_rotate" kp="20"  user="1"/>
+        <position ctrllimited="true" ctrlrange="0.021 0.057" joint="left/left_finger" kp="200"  user="1"/>
+        <!position ctrllimited="true" ctrlrange="-0.057 -0.021" joint="left/right_finger" kp="200"  user="1"/>
+
+        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="right/waist" kp="800"  user="1" forcelimited="true" forcerange="-150 150"/>
+        <position ctrllimited="true" ctrlrange="-1.85005 1.25664" joint="right/shoulder" kp="1600"  user="1" forcelimited="true" forcerange="-300 300"/>
+        <position ctrllimited="true" ctrlrange="-1.76278 1.6057" joint="right/elbow" kp="800"  user="1" forcelimited="true" forcerange="-100 100"/>
+        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="right/forearm_roll" kp="10"  user="1" forcelimited="true" forcerange="-100 100"/>
+        <position ctrllimited="true" ctrlrange="-1.8675 2.23402" joint="right/wrist_angle" kp="50"  user="1"/>
+        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="right/wrist_rotate" kp="20"  user="1"/>
+        <position ctrllimited="true" ctrlrange="0.021 0.057" joint="right/left_finger" kp="200"  user="1"/>
+        <!osition ctrllimited="true" ctrlrange="-0.057 -0.021" joint="vx300s_right/right_finger" kp="200"  user="1"/> 
+
+    </actuator>
+
+    <keyframe>
+        <!key qpos="0 -0.96 1.16 0 -0.3 0 0.024 -0.024  0 -0.96 1.16 0 -0.3 0 0.024 -0.024"/>
+    </keyframe>
+
+
+</mujoco>

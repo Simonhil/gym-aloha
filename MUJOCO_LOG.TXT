@@ -1,3 +1,9 @@
 Mon Mar 17 16:16:28 2025
 WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0100.
 
+Tue May 20 10:10:13 2025
+ERROR: mjv_updateSceneState: m->nu changed
+
+Tue May 20 13:43:04 2025
+ERROR: mjv_updateSceneState: m->nu changed
+

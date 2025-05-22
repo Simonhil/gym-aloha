@@ -3,11 +3,13 @@ import imageio
 import gymnasium as gym
 from dm_control import mujoco
 import numpy as np
+import trimesh
 import gym_aloha
 from gym_aloha.constants import ASSETS_DIR
 from mujoco import viewer as mj_viewer
 
-env = gym.make("gym_aloha/AlohaTest-v0")
+
+env = gym.make("gym_aloha/AlohaBockStacking-v0")
 observation, info = env.reset()
 frames = []
 
@@ -26,16 +28,27 @@ for _ in range(1000):
     # time.sleep(1)
 
 env.close()
-#imageio.mimsave("example.mp4", np.stack(frames), fps=25)
-# xml_path = ASSETS_DIR / "bimanual_viperx_ball_maze.xml"
-# physics = mujoco.Physics.from_xml_path(str(xml_path))
-# model = physics.model.ptr
-# data = physics.data.ptr
+imageio.mimsave("example.mp4", np.stack(frames), fps=25)
+xml_path = ASSETS_DIR / "bimanual_viperx_ball_maze.xml"
+physics = mujoco.Physics.from_xml_path(str(xml_path))
+model = physics.model.ptr
+data = physics.data.ptr
 
-# viewer = mj_viewer.launch_passive(
-#     model=model,
-#     data=data,
-# )
-# for i in range(1000):
-#      viewer.sync()
-#      time.sleep(0.02)
+viewer = mj_viewer.launch_passive(
+    model=model,
+    data=data,
+)
+for i in range(1000):
+     viewer.sync()
+     time.sleep(0.02)
+
+
+# mesh_or_scene = trimesh.load('/home/i53/student/shilber/3dstuff/v-hacd/app/build/decomp.stl')
+
+# if isinstance(mesh_or_scene, trimesh.Scene):
+#     # Combine all geometries into a single mesh
+#     mesh = trimesh.util.concatenate(mesh_or_scene.dump())
+# else:
+#      mesh = mesh_or_scene
+# print("Number of faces:", mesh.faces.shape[0])
+# mesh.export('/home/i53/student/shilber/3dstuff/v-hacd/app/build/decomp_output_binary.stl', file_type='stl')

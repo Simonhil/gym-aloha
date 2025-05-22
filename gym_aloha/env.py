@@ -9,8 +9,10 @@ from gym_aloha.constants import (
     ACTIONS,
     ASSETS_DIR,
     BLOCK_NAMES,
+    BODY_NAMES_PEG_CONSTRUCTION,
     DT,
     JOINTS,
+    NUMBER_BOARDS,
 )
 from gym_aloha.tasks.sim import BOX_POSE, BlockStackingTask, InsertionTask, TransferCubeTask
 from gym_aloha.tasks.sim_end_effector import (
@@ -163,16 +165,28 @@ class AlohaEnv(gym.Env):
             xml_path = ASSETS_DIR / "bimanual_viperx_block stacking.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
             task = BlockStackingTask()
-            hole_num = random.randint(2, 65)
+        elif task_name == "peg_construction":
+            xml_path = ASSETS_DIR / "bimanual_viperx_peg_connection.xml"
+            physics = mujoco.Physics.from_xml_path(str(xml_path))
+            task = BlockStackingTask()
+        elif task_name == "ball_maze":
+            xml_path = ASSETS_DIR / "bimanual_viperx_ball_maze.xml"
+            physics = mujoco.Physics.from_xml_path(str(xml_path))
+            task = TransferCubeTask()
+            SELECTED_BOARD = random.randint(0, NUMBER_BOARDS)
+            for i in range(NUMBER_BOARDS + 1):
+                if i == SELECTED_BOARD :
+                    continue
+                else:
+                    body_id = physics.model.name2id(f"board{i}", 'body')
 
-            #body_id = physics.model.name2id(f"peg{hole_num}", 'body')
-
-            # # # Hide it (alpha = 0)
-            # #physics.model.geom_rgba[geom_id][3] = 0.0
-
-            # # # Disable collisions by moving it far away
-            #physics.model.body_pos[body_id] = [0, 0, 1]
-
+                    # # Disable collisions by moving it far away
+                    physics.model.body_pos[body_id] = [0, (10 + i), 1]
+        elif task_name == "test":
+            xml_path = ASSETS_DIR / "bimanual_viperx_square_arch_assembly.xml"
+            physics = mujoco.Physics.from_xml_path(str(xml_path))
+            task = TransferCubeTask()
+            
         elif task_name == "end_effector_transfer_cube":
             raise NotImplementedError()
             xml_path = ASSETS_DIR / "bimanual_viperx_end_effector_transfer_cube.xml"
@@ -184,7 +198,7 @@ class AlohaEnv(gym.Env):
             physics = mujoco.Physics.from_xml_path(str(xml_path))
             task = InsertionEndEffectorTask()
         elif task_name == "test":
-            xml_path = ASSETS_DIR / "bimanual_viperx_ball_maze.xml"
+            xml_path = ASSETS_DIR / "bimanual_viperx_square_arch_assembly.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
             task = TransferCubeTask()
             # body_id = physics.model.name2id('blue', 'body')
@@ -235,6 +249,12 @@ class AlohaEnv(gym.Env):
             for i in range(len(BLOCK_NAMES)):
                 BOX_POSE.append(sample_box_pose(seed)) # used in sim reset
                 print(BOX_POSE)
+        elif self.task == "peg_construction":
+            for i in range(len(BODY_NAMES_PEG_CONSTRUCTION)):
+                BOX_POSE.append(sample_box_pose(seed)) # used in sim reset
+                print(BOX_POSE)
+        elif self.task == "ball_maze":
+             BOX_POSE.append(sample_box_pose(seed))  # used in sim reset
         else:
             raise ValueError(self.task)
 

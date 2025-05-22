@@ -39,3 +39,22 @@ register(
     nondeterministic=True,
     kwargs={"obs_type": "pixels_agent_pos", "task": "block_stacking"},
 )
+
+register(
+    id="gym_aloha/AlohaBallMaze-v0",
+    entry_point="gym_aloha.env:AlohaEnv",
+    max_episode_steps=300,
+    # Even after seeding, the rendered observations are slightly different,
+    # so we set `nondeterministic=True` to pass `check_env` tests
+    nondeterministic=True,
+    kwargs={"obs_type": "pixels_agent_pos", "task": "ball_maze"},
+)
+register(
+    id="gym_aloha/AlohaPegConstruction-v0",
+    entry_point="gym_aloha.env:AlohaEnv",
+    max_episode_steps=300,
+    # Even after seeding, the rendered observations are slightly different,
+    # so we set `nondeterministic=True` to pass `check_env` tests
+    nondeterministic=True,
+    kwargs={"obs_type": "pixels_agent_pos", "task":"peg_construction"},
+)

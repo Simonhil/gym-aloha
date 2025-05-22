@@ -5,6 +5,7 @@ from dm_control.suite import base
 
 from gym_aloha.constants import (
     BLOCK_NAMES,
+    BODY_NAMES_PEG_CONSTRUCTION,
     START_ARM_POSE,
     normalize_puppet_gripper_position,
     normalize_puppet_gripper_velocity,
@@ -151,6 +152,55 @@ class TransferCubeTask(BimanualViperXTask):
             reward = 4
         return reward
 
+class BallMaze(BimanualViperXTask):
+    def __init__(self, random=None):
+        super().__init__(random=random)
+        self.max_reward = 4
+
+    def initialize_episode(self, physics):
+        """Sets the state of the environment at the start of each episode."""
+        # TODO Notice: this function does not randomize the env configuration. Instead, set BOX_POSE from outside
+        # reset qpos, control and box position
+        with physics.reset_context():
+            #physics.named.data.qpos[:14] = START_ARM_POSE
+            physics.named.data.qpos[:7] = START_ARM_POSE[:7]
+            physics.named.data.qpos[8:15] = START_ARM_POSE[7:]
+            np.copyto(physics.data.ctrl, START_ARM_POSE)
+            assert BOX_POSE[0] is not None
+            physics.named.data.qpos[-7:] = BOX_POSE[0]
+            # print(f"{BOX_POSE=}")
+        super().initialize_episode(physics)
+
+    @staticmethod
+    def get_env_state(physics):
+        env_state = physics.data.qpos.copy()[16:]
+        return env_state
+
+    def get_reward(self, physics):
+        # return whether left gripper is holding the box
+        # all_contact_pairs = []
+        # for i_contact in range(physics.data.ncon):
+        #     id_geom_1 = physics.data.contact[i_contact].geom1
+        #     id_geom_2 = physics.data.contact[i_contact].geom2
+        #     name_geom_1 = physics.model.id2name(id_geom_1, "geom")
+        #     name_geom_2 = physics.model.id2name(id_geom_2, "geom")
+        #     contact_pair = (name_geom_1, name_geom_2)
+        #     all_contact_pairs.append(contact_pair)
+
+        # touch_left_gripper = ("red_box", "vx300s_left/10_left_gripper_finger") in all_contact_pairs
+        # touch_right_gripper = ("red_box", "vx300s_right/10_right_gripper_finger") in all_contact_pairs
+        # touch_table = ("red_box", "table") in all_contact_pairs
+
+        # reward = 0
+        # if touch_right_gripper:
+        #     reward = 1
+        # if touch_right_gripper and not touch_table:  # lifted
+        #     reward = 2
+        # if touch_left_gripper:  # attempted transfer
+        #     reward = 3
+        # if touch_left_gripper and not touch_table:  # successful transfer
+        #     reward = 4
+        return 0
 
 class InsertionTask(BimanualViperXTask):
     def __init__(self, random=None):
@@ -257,3 +307,77 @@ class BlockStackingTask(BimanualViperXTask):
         #TODO be implemented once needed
         
         return 0
+    
+    class PegConstructionTask(BimanualViperXTask):
+        def __init__(self, random=None):
+            super().__init__(random=random)
+            self.max_reward = 4
+            self.num_blocks = 0
+
+        def initialize_episode(self, physics):
+            """Sets the state of the environment at the start of each episode."""
+            # TODO Notice: this function does not randomize the env configuration. Instead, set BOX_POSE from outside
+            # reset qpos, control and box position
+            with physics.reset_context():
+                #physics.named.data.qpos[:14] = START_ARM_POSE
+                physics.named.data.qpos[:7] = START_ARM_POSE[:7]
+                physics.named.data.qpos[8:15] = START_ARM_POSE[7:]
+                np.copyto(physics.data.ctrl, START_ARM_POSE)
+
+                piece_ids = []
+                for name in BODY_NAMES_PEG_CONSTRUCTION:
+                    piece_ids.append(physics.model.name2id(name, 'body'))
+
+                for i in range(len(piece_ids)):
+                    assert len(BOX_POSE) != 0
+                    physics.model.body_pos[piece_ids[i]] = BOX_POSE[i][:3]
+                    physics.model.body_quat[piece_ids[i]] = BOX_POSE[i][3:]
+                # print(f"{BOX_POSE=}")
+            super().initialize_episode(physics)
+
+        @staticmethod
+        def get_env_state(physics):
+            env_state = physics.data.qpos.copy()[16:]
+            return env_state
+
+        def get_reward(self, physics):
+            #TODO be implemented once needed
+            
+            return 0
+        
+    class SquareArchTask(BimanualViperXTask):
+        def __init__(self, random=None):
+            super().__init__(random=random)
+            self.max_reward = 4
+            self.num_blocks = 0
+
+        def initialize_episode(self, physics):
+            """Sets the state of the environment at the start of each episode."""
+            # TODO Notice: this function does not randomize the env configuration. Instead, set BOX_POSE from outside
+            # reset qpos, control and box position
+            with physics.reset_context():
+                #physics.named.data.qpos[:14] = START_ARM_POSE
+                physics.named.data.qpos[:7] = START_ARM_POSE[:7]
+                physics.named.data.qpos[8:15] = START_ARM_POSE[7:]
+                np.copyto(physics.data.ctrl, START_ARM_POSE)
+
+                piece_ids = []
+                for name in BODY_NAMES_PEG_CONSTRUCTION:
+                    piece_ids.append(physics.model.name2id(name, 'body'))
+
+                for i in range(len(piece_ids)):
+                    assert len(BOX_POSE) != 0
+                    physics.model.body_pos[piece_ids[i]] = BOX_POSE[i][:3]
+                    physics.model.body_quat[piece_ids[i]] = BOX_POSE[i][3:]
+                # print(f"{BOX_POSE=}")
+            super().initialize_episode(physics)
+
+        @staticmethod
+        def get_env_state(physics):
+            env_state = physics.data.qpos.copy()[16:]
+            return env_state
+
+        def get_reward(self, physics):
+            #TODO be implemented once needed
+            
+            return 0
