@@ -3,51 +3,47 @@
     <worldbody>
        <body name="box_1" pos="0 0 0.05">
             <joint name="red_box_joint" type="free" frictionloss="0.01" />
-            <inertial pos="0 0 0" mass="0.05" diaginertia="0.002 0.002 0.002" />
-            <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.015 0.015 0.015" type="box" name="red_box" rgba="1 0 0 1" />
+            <inertial pos="0 0 0" mass="0.5" diaginertia="1e-2 1e-2 1e-2" />
+            <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.05 0.005 0.0001" pos="0 0 0" size="0.03 0.03 0.03" type="box" name="red_box" rgba="1 0 0 1" />
         </body>
 
-        <body name="rectangle_1" pos="0 0.05 0.05">
+        <body name="rectangle_1" pos=" -0.1 0 0.05">
             <joint name="rectangle_1_joint" type="free" frictionloss="0.01" />
-            <inertial pos="0 0 0" mass="0.05" diaginertia="0.002 0.002 0.002" />
-            <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.045 0.0075 0.015" type="box" name="red_rectangle" rgba="1 0 0 1" />
+            <inertial pos="0 0 0" mass="0.05" diaginertia="1e-5 1e-5 1e-5" />
+            <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.05 0.005 0.0001" pos="0 0 0" size="0.1 0.02 0.01" type="box" name="pink_rectangle" rgba="1 0 1 1" />
         </body>
 
-         <body name="rectangle_2" pos="0  -0.05 0.05">
+         <body name="rectangle_2" pos="-0.05  -0.08 0.05">
             <joint name="rectangle_2_joint" type="free" frictionloss="0.01" />
-            <inertial pos="0 0 0" mass="0.05" diaginertia="0.002 0.002 0.002" />
-            <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.045 0.0075 0.015" type="box" name="green_rectangle" rgba="0 1 0 1" />
+            <inertial pos="0 0 0" mass="0.05" diaginertia="1e-5 1e-5 1e-5" />
+            <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.05 0.005 0.0001" pos="0 0 0" size="0.015 0.015 0.045" type="box" name="green_rectangle" rgba="0 1 0 1" />
         </body>
 
-         <body name="rectangle_3" pos="0.05 0 0.05">
+         <body name="rectangle_3" pos="0.05 -0.08 0.05">
             <joint name="rectangle_3_joint" type="free" frictionloss="0.01" />
-            <inertial pos="0 0 0" mass="0.05" diaginertia="0.002 0.002 0.002" />
-            <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.045 0.0075 0.015" type="box" name="blue_rectangle" rgba="0 0 1 1" />
+            <inertial pos="0 0 0" mass="0.05" diaginertia="1e-5 1e-5 1e-5" />
+            <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.05 0.005 0.0001" pos="0 0 0" size="0.015 0.015 0.045" type="box" name="blue_rectangle" rgba="0 0 1 1" />
         </body>
 
 
     </worldbody>
 
     <actuator>
-        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="left/waist" kp="800"  user="1" forcelimited="true" forcerange="-150 150"/>
-        <position ctrllimited="true" ctrlrange="-1.85005 1.25664" joint="left/shoulder" kp="1600"  user="1" forcelimited="true" forcerange="-300 300"/>
-        <position ctrllimited="true" ctrlrange="-1.76278 1.6057" joint="left/elbow" kp="800"  user="1" forcelimited="true" forcerange="-100 100"/>
-        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="left/forearm_roll" kp="10"  user="1" forcelimited="true" forcerange="-100 100"/>
-        <position ctrllimited="true" ctrlrange="-1.8675 2.23402" joint="left/wrist_angle" kp="50"  user="1"/>
-        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="left/wrist_rotate" kp="20"  user="1"/>
-        <position ctrllimited="true" ctrlrange="0.021 0.057" joint="left/left_finger" kp="200"  user="1"/>
-        <!-- <position ctrllimited="true" ctrlrange="-0.057 -0.021" joint="left/right_finger" kp="200"  user="1"/> -->
+        <position class="waist" name="left/waist" joint="left/waist"/>
+        <position class="shoulder" name="left/shoulder" joint="left/shoulder"/>
+        <position class="elbow" name="left/elbow" joint="left/elbow"/>
+        <position class="forearm_roll" name="left/forearm_roll" joint="left/forearm_roll"/>
+        <position class="wrist_angle" name="left/wrist_angle" joint="left/wrist_angle"/>
+        <position class="wrist_rotate" name="left/wrist_rotate" joint="left/wrist_rotate"/>
+        <position class="finger" name="left/gripper" joint="left/left_finger"/>
 
-        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="right/waist" kp="800"  user="1" forcelimited="true" forcerange="-150 150"/>
-        <position ctrllimited="true" ctrlrange="-1.85005 1.25664" joint="right/shoulder" kp="1600"  user="1" forcelimited="true" forcerange="-300 300"/>
-        <position ctrllimited="true" ctrlrange="-1.76278 1.6057" joint="right/elbow" kp="800"  user="1" forcelimited="true" forcerange="-100 100"/>
-        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="right/forearm_roll" kp="10"  user="1" forcelimited="true" forcerange="-100 100"/>
-        <position ctrllimited="true" ctrlrange="-1.8675 2.23402" joint="right/wrist_angle" kp="50"  user="1"/>
-        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="right/wrist_rotate" kp="20"  user="1"/>
-        <position ctrllimited="true" ctrlrange="0.021 0.057" joint="right/left_finger" kp="200"  user="1"/>
-        <!-- <position ctrllimited="true" ctrlrange="0.021 0.057" joint="vx300s_right/left_finger" kp="200"  user="1"/>
-        <position ctrllimited="true" ctrlrange="-0.057 -0.021" joint="vx300s_right/right_finger" kp="200"  user="1"/> -->
-
+        <position class="waist" name="right/waist" joint="right/waist"/>
+        <position class="shoulder" name="right/shoulder" joint="right/shoulder"/>
+        <position class="elbow" name="right/elbow" joint="right/elbow"/>
+        <position class="forearm_roll" name="right/forearm_roll" joint="right/forearm_roll"/>
+        <position class="wrist_angle" name="right/wrist_angle" joint="right/wrist_angle"/>
+        <position class="wrist_rotate" name="right/wrist_rotate" joint="right/wrist_rotate"/>
+        <position class="finger" name="right/gripper" joint="right/left_finger"/>
     </actuator>
 
     <keyframe>

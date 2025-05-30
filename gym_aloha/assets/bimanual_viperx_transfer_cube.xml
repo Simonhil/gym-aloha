@@ -14,25 +14,40 @@
     </worldbody>
 
     <actuator>
-        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="left/waist" kp="800"  user="1" forcelimited="true" forcerange="-150 150"/>
+        <!-- <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="left/waist" kp="800"  user="1" forcelimited="true" forcerange="-150 150"/>
         <position ctrllimited="true" ctrlrange="-1.85005 1.25664" joint="left/shoulder" kp="1600"  user="1" forcelimited="true" forcerange="-300 300"/>
         <position ctrllimited="true" ctrlrange="-1.76278 1.6057" joint="left/elbow" kp="800"  user="1" forcelimited="true" forcerange="-100 100"/>
         <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="left/forearm_roll" kp="10"  user="1" forcelimited="true" forcerange="-100 100"/>
         <position ctrllimited="true" ctrlrange="-1.8675 2.23402" joint="left/wrist_angle" kp="50"  user="1"/>
         <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="left/wrist_rotate" kp="20"  user="1"/>
-        <position ctrllimited="true" ctrlrange="0.021 0.057" joint="left/left_finger" kp="200"  user="1"/>
+        <position ctrllimited="true" ctrlrange="0 0.057" joint="left/left_finger" kp="200"  user="1"/> -->
         <!-- <position ctrllimited="true" ctrlrange="-0.057 -0.021" joint="left/right_finger" kp="200"  user="1"/> -->
 
-        <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="right/waist" kp="800"  user="1" forcelimited="true" forcerange="-150 150"/>
+        <!-- <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="right/waist" kp="800"  user="1" forcelimited="true" forcerange="-150 150"/>
         <position ctrllimited="true" ctrlrange="-1.85005 1.25664" joint="right/shoulder" kp="1600"  user="1" forcelimited="true" forcerange="-300 300"/>
         <position ctrllimited="true" ctrlrange="-1.76278 1.6057" joint="right/elbow" kp="800"  user="1" forcelimited="true" forcerange="-100 100"/>
         <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="right/forearm_roll" kp="10"  user="1" forcelimited="true" forcerange="-100 100"/>
         <position ctrllimited="true" ctrlrange="-1.8675 2.23402" joint="right/wrist_angle" kp="50"  user="1"/>
         <position ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="right/wrist_rotate" kp="20"  user="1"/>
-        <position ctrllimited="true" ctrlrange="0.021 0.057" joint="right/left_finger" kp="200"  user="1"/>
+        <position ctrllimited="true" ctrlrange="0 0.057" joint="right/left_finger" kp="200"  user="1"/>
+        <position class="finger" name="right/gripper" joint="right/left_finger"/> -->
         <!-- <position ctrllimited="true" ctrlrange="0.021 0.057" joint="vx300s_right/left_finger" kp="200"  user="1"/>
         <position ctrllimited="true" ctrlrange="-0.057 -0.021" joint="vx300s_right/right_finger" kp="200"  user="1"/> -->
+        <position class="waist" name="left/waist" joint="left/waist"/>
+        <position class="shoulder" name="left/shoulder" joint="left/shoulder"/>
+        <position class="elbow" name="left/elbow" joint="left/elbow"/>
+        <position class="forearm_roll" name="left/forearm_roll" joint="left/forearm_roll"/>
+        <position class="wrist_angle" name="left/wrist_angle" joint="left/wrist_angle"/>
+        <position class="wrist_rotate" name="left/wrist_rotate" joint="left/wrist_rotate"/>
+        <position class="finger" name="left/gripper" joint="left/left_finger"/>
 
+        <position class="waist" name="right/waist" joint="right/waist"/>
+        <position class="shoulder" name="right/shoulder" joint="right/shoulder"/>
+        <position class="elbow" name="right/elbow" joint="right/elbow"/>
+        <position class="forearm_roll" name="right/forearm_roll" joint="right/forearm_roll"/>
+        <position class="wrist_angle" name="right/wrist_angle" joint="right/wrist_angle"/>
+        <position class="wrist_rotate" name="right/wrist_rotate" joint="right/wrist_rotate"/>
+        <position class="finger" name="right/gripper" joint="right/left_finger"/>
     </actuator>
 
     <keyframe>

@@ -47,7 +47,7 @@ ACTIONS = [
 ]
 
 
-START_ARM_POSE = [0 ,-0.96, 1.16 ,0 ,-0.3 ,0 ,0.024,0 ,-0.96, 1.16 ,0 ,-0.3 ,0 ,0.024]
+START_ARM_POSE = [0 ,-0.96, 1.16 ,0 ,-0.3 ,0 ,0.014,0 ,-0.96, 1.16 ,0 ,-0.3 ,0 ,0.024]
 
 ASSETS_DIR = Path(__file__).parent.resolve() / "assets"  # note: absolute path
 
@@ -81,9 +81,17 @@ SELECTED_BOARD=1
 
 ###########################Peg construction#####################
 BODY_NAMES_PEG_CONSTRUCTION=[
-    "socket",
+    #"socket",
     "board",
     "peg"
+]
+
+######################join blocks##########
+
+BODY_NAMES_JOIN_BLOCKS=[
+  
+    "hblock",
+    "pblock",
 ]
 
 ############################ Helper functions ############################

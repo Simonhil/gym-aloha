@@ -5,6 +5,7 @@ from dm_control.suite import base
 
 from gym_aloha.constants import (
     BLOCK_NAMES,
+    BODY_NAMES_JOIN_BLOCKS,
     BODY_NAMES_PEG_CONSTRUCTION,
     START_ARM_POSE,
     normalize_puppet_gripper_position,
@@ -307,8 +308,9 @@ class BlockStackingTask(BimanualViperXTask):
         #TODO be implemented once needed
         
         return 0
-    
-    class PegConstructionTask(BimanualViperXTask):
+
+        
+class PegConstructionTask(BimanualViperXTask):
         def __init__(self, random=None):
             super().__init__(random=random)
             self.max_reward = 4
@@ -344,8 +346,8 @@ class BlockStackingTask(BimanualViperXTask):
             #TODO be implemented once needed
             
             return 0
-        
-    class SquareArchTask(BimanualViperXTask):
+
+class JoinBlocksTask(BimanualViperXTask):
         def __init__(self, random=None):
             super().__init__(random=random)
             self.max_reward = 4
@@ -362,7 +364,7 @@ class BlockStackingTask(BimanualViperXTask):
                 np.copyto(physics.data.ctrl, START_ARM_POSE)
 
                 piece_ids = []
-                for name in BODY_NAMES_PEG_CONSTRUCTION:
+                for name in BODY_NAMES_JOIN_BLOCKS:
                     piece_ids.append(physics.model.name2id(name, 'body'))
 
                 for i in range(len(piece_ids)):

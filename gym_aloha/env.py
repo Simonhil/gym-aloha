@@ -1,4 +1,5 @@
 import random
+import time
 import gymnasium as gym
 import numpy as np
 from dm_control import mujoco
@@ -9,12 +10,13 @@ from gym_aloha.constants import (
     ACTIONS,
     ASSETS_DIR,
     BLOCK_NAMES,
+    BODY_NAMES_JOIN_BLOCKS,
     BODY_NAMES_PEG_CONSTRUCTION,
     DT,
     JOINTS,
     NUMBER_BOARDS,
 )
-from gym_aloha.tasks.sim import BOX_POSE, BlockStackingTask, InsertionTask, TransferCubeTask
+from gym_aloha.tasks.sim import BOX_POSE, BlockStackingTask, InsertionTask, JoinBlocksTask, PegConstructionTask, TransferCubeTask
 from gym_aloha.tasks.sim_end_effector import (
     InsertionEndEffectorTask,
     TransferCubeEndEffectorTask,
@@ -33,8 +35,8 @@ class AlohaEnv(gym.Env):
         render_mode="rgb_array",
         observation_width=224,
         observation_height=224,
-        visualization_width=224,
-        visualization_height=224,
+        visualization_width=740,
+        visualization_height=740,
     ):
         super().__init__()
         self.task = task
@@ -120,7 +122,7 @@ class AlohaEnv(gym.Env):
         model=model,
         data=data,
     )
-
+       
 
 
 
@@ -165,23 +167,19 @@ class AlohaEnv(gym.Env):
             xml_path = ASSETS_DIR / "bimanual_viperx_block stacking.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
             task = BlockStackingTask()
+        elif task_name == "join_blocks":
+            xml_path = ASSETS_DIR / "bimanual_viperx_join_blocks.xml"
+            physics = mujoco.Physics.from_xml_path(str(xml_path))
+            task =  JoinBlocksTask()
+
         elif task_name == "peg_construction":
             xml_path = ASSETS_DIR / "bimanual_viperx_peg_connection.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
-            task = BlockStackingTask()
+            task =  PegConstructionTask()
         elif task_name == "ball_maze":
             xml_path = ASSETS_DIR / "bimanual_viperx_ball_maze.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
             task = TransferCubeTask()
-            SELECTED_BOARD = random.randint(0, NUMBER_BOARDS)
-            for i in range(NUMBER_BOARDS + 1):
-                if i == SELECTED_BOARD :
-                    continue
-                else:
-                    body_id = physics.model.name2id(f"board{i}", 'body')
-
-                    # # Disable collisions by moving it far away
-                    physics.model.body_pos[body_id] = [0, (10 + i), 1]
         elif task_name == "test":
             xml_path = ASSETS_DIR / "bimanual_viperx_square_arch_assembly.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
@@ -233,12 +231,10 @@ class AlohaEnv(gym.Env):
     def reset(self, seed=None, options=None):
         super().reset(seed=seed)
 
-        # TODO(rcadene): how to seed the env?
         if seed is not None:
             self._env.task.random.seed(seed)
             self._env.task._random = np.random.RandomState(seed)
 
-        # TODO(rcadene): do not use global variable for this
         if self.task == "transfer_cube":
              BOX_POSE.append(sample_box_pose(seed))  # used in sim reset
         elif self.task == "insertion":
@@ -253,6 +249,10 @@ class AlohaEnv(gym.Env):
             for i in range(len(BODY_NAMES_PEG_CONSTRUCTION)):
                 BOX_POSE.append(sample_box_pose(seed)) # used in sim reset
                 print(BOX_POSE)
+        elif self.task == "join_blocks":
+            for i in range(len(BODY_NAMES_JOIN_BLOCKS)):
+                BOX_POSE.append(sample_box_pose(seed)) # used in sim reset
+                print(BOX_POSE)
         elif self.task == "ball_maze":
              BOX_POSE.append(sample_box_pose(seed))  # used in sim reset
         else:
@@ -263,7 +263,7 @@ class AlohaEnv(gym.Env):
         observation = self._format_raw_obs(raw_obs.observation)
 
         info = {"is_success": False}
-        self.viewer.sync()
+        #self.viewer.sync()
         return observation, info
 
     def step(self, action):
@@ -277,7 +277,6 @@ class AlohaEnv(gym.Env):
         terminated = is_success = reward == 4
 
         info = {"is_success": is_success}
-
         observation = self._format_raw_obs(raw_obs)
 
         truncated = False
@@ -285,3 +284,48 @@ class AlohaEnv(gym.Env):
 
     def close(self):
         pass
+
+
+
+class AlohaMazeEnv(AlohaEnv):
+    def __init__(
+        self,
+        task,
+        obs_type="pixels_agent_pos",
+        render_mode="rgb_array",
+        observation_width=224,
+        observation_height=224,
+        visualization_width=740,
+        visualization_height=740,
+    ):
+        super().__init__(task, obs_type)
+   
+    def reset(self, seed=None, options=None):
+        self._env.close()
+        self.viewer.close()
+
+        self._env = self._make_env_task(self.task)
+
+
+        model = self._env.physics.model.ptr
+        data = self._env.physics.data.ptr
+
+    #     self.viewer = mj_viewer.launch_passive(
+    #     model=model,
+    #     data=data,
+    # )
+        obs, info = super().reset()
+
+        SELECTED_BOARD = random.randint(0, NUMBER_BOARDS)
+        print(SELECTED_BOARD)
+        for i in range(NUMBER_BOARDS + 1):
+            if i == SELECTED_BOARD :
+                continue
+            else:
+                body_id = self._env.physics.model.name2id(f"board{i}", 'body')
+
+                # # Disable collisions by moving it far away
+                self._env.physics.model.body_pos[body_id] = [0, (1 + i), 40]
+        self._env.physics.forward()       
+        #self.viewer.sync()
+        return  obs, info

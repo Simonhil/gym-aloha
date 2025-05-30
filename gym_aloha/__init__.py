@@ -17,8 +17,22 @@ register(
     # Even after seeding, the rendered observations are slightly different,
     # so we set `nondeterministic=True` to pass `check_env` tests
     nondeterministic=True,
+    #kwargs={"obs_type": "pixels_agent_pos", "task": "transfer_cube"},
+    kwargs={"obs_type": "pixels", "task": "transfer_cube"},
+)
+
+register(
+    id="gym_aloha/AlohaTransferCube-v1",
+    entry_point="gym_aloha.env:AlohaEnv",
+    max_episode_steps=300,
+    # Even after seeding, the rendered observations are slightly different,
+    # so we set `nondeterministic=True` to pass `check_env` tests
+    nondeterministic=True,
+    #kwargs={"obs_type": "pixels_agent_pos", "task": "transfer_cube"},
     kwargs={"obs_type": "pixels_agent_pos", "task": "transfer_cube"},
 )
+
+
 
 register(
     id="gym_aloha/AlohaTest-v0",
@@ -42,7 +56,7 @@ register(
 
 register(
     id="gym_aloha/AlohaBallMaze-v0",
-    entry_point="gym_aloha.env:AlohaEnv",
+    entry_point="gym_aloha.env:AlohaMazeEnv",
     max_episode_steps=300,
     # Even after seeding, the rendered observations are slightly different,
     # so we set `nondeterministic=True` to pass `check_env` tests
@@ -57,4 +71,14 @@ register(
     # so we set `nondeterministic=True` to pass `check_env` tests
     nondeterministic=True,
     kwargs={"obs_type": "pixels_agent_pos", "task":"peg_construction"},
+)
+
+register(
+    id="gym_aloha/AlohaJoinBlocks-v0",
+    entry_point="gym_aloha.env:AlohaEnv",
+    max_episode_steps=300,
+    # Even after seeding, the rendered observations are slightly different,
+    # so we set `nondeterministic=True` to pass `check_env` tests
+    nondeterministic=True,
+    kwargs={"obs_type": "pixels_agent_pos", "task":"join_blocks"},
 )
