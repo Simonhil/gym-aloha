@@ -7,6 +7,7 @@ from dm_control import mujoco
 from dm_control.rl import control
 from gymnasium import spaces
 from mujoco import viewer as mj_viewer
+import torch
 from gym_aloha.constants import (
     ACTIONS,
     ASSETS_DIR,
@@ -258,6 +259,10 @@ class AlohaEnv(gym.Env):
         raw_obs = self._env.reset()
 
         observation = self._format_raw_obs(raw_obs.observation)
+        if "pixels" in observation:
+            observation["pixels"] = self.crop_img_in_observation(observation["pixels"])
+        else:
+            observation=self.crop_img_in_observation(observation)
 
         info = {"is_success": False}
         #self.viewer.sync()
@@ -267,22 +272,19 @@ class AlohaEnv(gym.Env):
      
             # img = img[:350,50:500,:]#[80:,50:630,:] #[:,:,:]
             # img = img[50:690, 260:900:, :]
-       # Resize and convert 'overhead_cam' from RGB to BGR
-        overhead = observation['pixels']["overhead_cam"]
-        overhead = cv2.resize(overhead, (224, 224))
-        observation['pixels']["overhead_cam"] =cv2.cvtColor(overhead, cv2.COLOR_RGB2BGR)
+        overhead = observation["overhead_cam"][:, :, :]
+        overhead=cv2.cvtColor(overhead, cv2.COLOR_RGB2BGR)
+        observation["overhead_cam"]=np.array(cv2.resize(overhead, (224, 224)))
+    
 
-        # Resize and convert 'wrist_cam_left' from RGB to BGR
-        wrist_left = observation['pixels']["wrist_cam_left"]
-        wrist_left = cv2.resize(wrist_left, (224, 224))
-        observation['pixels']["wrist_cam_left"] =wrist_left #cv2.cvtColor(wrist_left, cv2.COLOR_RGB2BGR)
+        wrist_left = observation["wrist_cam_left"][:,:,:]#[:,:,:]
+        wrist_left=cv2.cvtColor(wrist_left, cv2.COLOR_RGB2BGR)
+        observation["wrist_cam_left"]=np.array(cv2.resize(wrist_left, (224, 224)))
 
-        # Resize and convert 'wrist_cam_right' from RGB to BGR
-        wrist_right = observation['pixels']["wrist_cam_right"]
-        wrist_right = cv2.resize(wrist_right, (224, 224))
-        observation['pixels']["wrist_cam_right"] =wrist_right#cv2.cvtColor(wrist_right, cv2.COLOR_RGB2BGR)
-
-        #observation['pixels']["wrist_cam_left"] = wrist_left#cv2.cvtColor(wrist_right, cv2.COLOR_RGB2BGR)
+            
+        wrist_right = observation["wrist_cam_right"][:,:,:]#[:,:,:]
+        wrist_right=cv2.cvtColor(wrist_right, cv2.COLOR_RGB2BGR)
+        observation["wrist_cam_right"]=np.array(cv2.resize(wrist_right, (224, 224)))
 
       
         return observation
@@ -300,7 +302,10 @@ class AlohaEnv(gym.Env):
 
         info = {"is_success": is_success}
         observation = self._format_raw_obs(raw_obs)
-        observation = self.crop_img_in_observation(observation)
+        if "pixels" in observation:
+            observation["pixels"] = self.crop_img_in_observation(observation["pixels"])
+        else:
+            observation=self.crop_img_in_observation(observation)
         truncated = False
 
         return observation, reward, terminated, truncated, info
