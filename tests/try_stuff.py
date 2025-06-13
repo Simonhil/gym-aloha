@@ -10,7 +10,7 @@ from gym_aloha.constants import ASSETS_DIR
 from mujoco import viewer as mj_viewer
 
 
-env = gym.make("gym_aloha/AlohaJoinBlocks-v0")
+env = gym.make("gym_aloha/AlohaTest-v0")
 observation, info = env.reset()
 frames = []
 

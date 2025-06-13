@@ -1,0 +1,100 @@
+<mujoco>
+    <include file="scene.xml"/>
+    <asset>
+    <!-- lid -->
+   
+    <mesh name="lid1" file="take_from_box/lid/Part Studio 1 - Part 6.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="lid2" file="take_from_box/lid/Part Studio 1 - Part 7.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="lid3" file="take_from_box/lid/Part Studio 1 - Part 8.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="lid4" file="take_from_box/lid/Part Studio 1 - Part 9.stl" scale="0.001 0.001 0.001"/>
+
+   
+   <!-- p block -->
+        
+    <mesh name="box1" file="take_from_box/box/Part Studio 1 - Part 1.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="box2" file="take_from_box/box/Part Studio 1 - Part 2.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="box3" file="take_from_box/box/Part Studio 1 - Part 3.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="box4" file="take_from_box/box/Part Studio 1 - Part 4.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="box5" file="take_from_box/box/Part Studio 1 - Part 5.stl" scale="0.001 0.001 0.001"/>
+
+    </asset>
+       
+
+    <worldbody>
+       
+
+        <body name="whole_box" pos="0 0 0" >
+            <joint name="box_joint" type="free" frictionloss="0.001" />
+            <inertial pos="0 0 0" mass="1000" diaginertia="1e-1 1e-1 1e-1"/>
+            <body name="lid" quat="1 0 0 1">
+                <joint name="pblock_joint" type="hinge" pos="0 -0.2 0.085" axis="1 0 0" range="0 90"/>
+                <inertial pos="0 0 0" mass="0.25" diaginertia="1e-2 1e-2 1e-2"/>
+            
+                <geom type="mesh" mesh="lid1" rgba="0.5 0.5 0 1" />
+                <geom type="mesh" mesh="lid1" class="collision"  friction="0.2 0.1 0.1" />
+
+                <geom type="mesh" mesh="lid2" rgba="0.5 0.5 0 1" />
+                <geom type="mesh" mesh="lid2" class="collision"  friction="0.2 0.1 0.1" />
+
+                <geom type="mesh" mesh="lid3" rgba="0.5 0.5 0 1" />
+                <geom type="mesh" mesh="lid3" class="collision"  friction="0.2 0.1 0.1" />
+
+                <geom type="mesh" mesh="lid4" rgba="0.5 0.5 0 1" />
+                <geom type="mesh" mesh="lid4" class="collision"  friction="0.2 0.1 0.1" />
+            </body>
+
+            <body name="box" quat="1 0 0 1">
+                <inertial pos="0 0 0" mass="0.05" diaginertia="1e-1 1e-1 1e-1"/>
+                <geom type="mesh" mesh="box1" rgba="0 0.5 0 1" />
+                <geom type="mesh" mesh="box1" class="collision"  friction="0.2 0.1 0.1" />
+
+                <geom type="mesh" mesh="box2" rgba="0 0.5 0 1" />
+                <geom type="mesh" mesh="box2" class="collision"  friction="0.2 0.1 0.1" />
+
+                <geom type="mesh" mesh="box3" rgba="0 0.5 0 1" />
+                <geom type="mesh" mesh="box3" class="collision"  friction="0.2 0.1 0.1" />
+
+                <geom type="mesh" mesh="box4" rgba="0 0.5 0 1" />
+                <geom type="mesh" mesh="box4" class="collision"  friction="0.2 0.1 0.1" />
+
+                <geom type="mesh" mesh="box5" rgba="0 0.5 0 1" />
+                <geom type="mesh" mesh="box5" class="collision"  friction="0.2 0.1 0.1" />
+
+            </body>
+
+        </body>
+
+        <body name="cube" pos="0.05 0.05 0.05">
+            <joint name="red_box_joint" type="free" frictionloss="0.01" />
+            <inertial pos="0 0 0" mass="0.05" diaginertia="0.002 0.002 0.002" />
+            <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.01 0.01 0.01" type="box" name="red_box" rgba="1 0 0 1" />
+        </body>
+
+
+    </worldbody>
+
+    <actuator>
+       <position class="waist" name="left/waist" joint="left/waist"/>
+        <position class="shoulder" name="left/shoulder" joint="left/shoulder"/>
+        <position class="elbow" name="left/elbow" joint="left/elbow"/>
+        <position class="forearm_roll" name="left/forearm_roll" joint="left/forearm_roll"/>
+        <position class="wrist_angle" name="left/wrist_angle" joint="left/wrist_angle"/>
+        <position class="wrist_rotate" name="left/wrist_rotate" joint="left/wrist_rotate"/>
+        <position class="finger" name="left/gripper" joint="left/left_finger"/>
+
+        <position class="waist" name="right/waist" joint="right/waist"/>
+        <position class="shoulder" name="right/shoulder" joint="right/shoulder"/>
+        <position class="elbow" name="right/elbow" joint="right/elbow"/>
+        <position class="forearm_roll" name="right/forearm_roll" joint="right/forearm_roll"/>
+        <position class="wrist_angle" name="right/wrist_angle" joint="right/wrist_angle"/>
+        <position class="wrist_rotate" name="right/wrist_rotate" joint="right/wrist_rotate"/>
+        <position class="finger" name="right/gripper" joint="right/left_finger"/>
+
+    </actuator>
+
+    <keyframe>
+        <!key qpos="0 -0.96 1.16 0 -0.3 0 0.024 -0.024  0 -0.96 1.16 0 -0.3 0 0.024 -0.024"/>
+    </keyframe>
+
+
+</mujoco>

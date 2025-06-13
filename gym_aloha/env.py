@@ -181,10 +181,6 @@ class AlohaEnv(gym.Env):
             xml_path = ASSETS_DIR / "bimanual_viperx_ball_maze.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
             task = TransferCubeTask()
-        elif task_name == "test":
-            xml_path = ASSETS_DIR / "bimanual_viperx_square_arch_assembly.xml"
-            physics = mujoco.Physics.from_xml_path(str(xml_path))
-            task = TransferCubeTask()
             
         elif task_name == "end_effector_transfer_cube":
             raise NotImplementedError()
@@ -197,7 +193,7 @@ class AlohaEnv(gym.Env):
             physics = mujoco.Physics.from_xml_path(str(xml_path))
             task = InsertionEndEffectorTask()
         elif task_name == "test":
-            xml_path = ASSETS_DIR / "bimanual_viperx_square_arch_assembly.xml"
+            xml_path = ASSETS_DIR / "bimanual_viperx_take_from_box.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
             task = TransferCubeTask()
             # body_id = physics.model.name2id('blue', 'body')
@@ -271,30 +267,32 @@ class AlohaEnv(gym.Env):
      
             # img = img[:350,50:500,:]#[80:,50:630,:] #[:,:,:]
             # img = img[50:690, 260:900:, :]
-        print(observation.keys())
        # Resize and convert 'overhead_cam' from RGB to BGR
         overhead = observation['pixels']["overhead_cam"]
         overhead = cv2.resize(overhead, (224, 224))
-        observation['pixels']["overhead_cam"] = cv2.cvtColor(overhead, cv2.COLOR_RGB2BGR)
+        observation['pixels']["overhead_cam"] =cv2.cvtColor(overhead, cv2.COLOR_RGB2BGR)
 
         # Resize and convert 'wrist_cam_left' from RGB to BGR
         wrist_left = observation['pixels']["wrist_cam_left"]
         wrist_left = cv2.resize(wrist_left, (224, 224))
-        observation['pixels']["wrist_cam_left"] = cv2.cvtColor(wrist_left, cv2.COLOR_RGB2BGR)
+        observation['pixels']["wrist_cam_left"] =wrist_left #cv2.cvtColor(wrist_left, cv2.COLOR_RGB2BGR)
 
         # Resize and convert 'wrist_cam_right' from RGB to BGR
         wrist_right = observation['pixels']["wrist_cam_right"]
         wrist_right = cv2.resize(wrist_right, (224, 224))
-        observation['pixels']["wrist_cam_right"] = cv2.cvtColor(wrist_right, cv2.COLOR_RGB2BGR)
+        observation['pixels']["wrist_cam_right"] =wrist_right#cv2.cvtColor(wrist_right, cv2.COLOR_RGB2BGR)
+
+        #observation['pixels']["wrist_cam_left"] = wrist_left#cv2.cvtColor(wrist_right, cv2.COLOR_RGB2BGR)
+
       
         return observation
 
     def step(self, action):
-        print(action)
         assert action.ndim == 1
         # TODO(rcadene): add info["is_success"] and info["success"] ?
 
         _, reward, _, raw_obs = self._env.step(action)
+        
         self.viewer.sync()
 
         # TODO(rcadene): add an enum
