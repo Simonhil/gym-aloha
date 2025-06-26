@@ -16,9 +16,10 @@ from gym_aloha.constants import (
     BODY_NAMES_PEG_CONSTRUCTION,
     DT,
     JOINTS,
+    MAZE_FILES,
     NUMBER_BOARDS,
 )
-from gym_aloha.tasks.sim import BOX_POSE, BlockStackingTask, InsertionTask, JoinBlocksTask, PegConstructionTask, TransferCubeTask
+from gym_aloha.tasks.sim import BOX_POSE, BallMaze, BlockStackingTask, InsertionTask, JoinBlocksTask, PegConstructionTask, PutInBoxTask, TransferCubeTask
 from gym_aloha.tasks.sim_end_effector import (
     InsertionEndEffectorTask,
     TransferCubeEndEffectorTask,
@@ -179,9 +180,11 @@ class AlohaEnv(gym.Env):
             physics = mujoco.Physics.from_xml_path(str(xml_path))
             task =  PegConstructionTask()
         elif task_name == "ball_maze":
-            xml_path = ASSETS_DIR / "bimanual_viperx_ball_maze.xml"
+            rand=random.randint(0, len(MAZE_FILES) - 1)
+            up_to = MAZE_FILES[rand]
+            xml_path = ASSETS_DIR / f"bimanual_viperx_ball_maze_to{up_to}.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
-            task = TransferCubeTask()
+            task = BallMaze()
             
         elif task_name == "end_effector_transfer_cube":
             raise NotImplementedError()
@@ -193,6 +196,10 @@ class AlohaEnv(gym.Env):
             xml_path = ASSETS_DIR / "bimanual_viperx_end_effector_insertion.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
             task = InsertionEndEffectorTask()
+        elif task_name == "put_in_box":
+            xml_path = ASSETS_DIR / "bimanual_viperx_put in_box.xml"
+            physics = mujoco.Physics.from_xml_path(str(xml_path))
+            task = PutInBoxTask()
         elif task_name == "test":
             xml_path = ASSETS_DIR / "bimanual_viperx_take_from_box.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
@@ -228,7 +235,6 @@ class AlohaEnv(gym.Env):
 
     def reset(self, seed=None, options=None):
         super().reset(seed=seed)
-
         if seed is not None:
             self._env.task.random.seed(seed)
             self._env.task._random = np.random.RandomState(seed)
@@ -253,6 +259,9 @@ class AlohaEnv(gym.Env):
                 print(BOX_POSE)
         elif self.task == "ball_maze":
              BOX_POSE.append(sample_box_pose(seed))  # used in sim reset
+        elif self.task == "put_in_box":
+            for i in range(len(BLOCK_NAMES)):
+                BOX_POSE.append(sample_box_pose(seed)) # used in sim reset
         else:
             raise ValueError(self.task)
 
@@ -338,12 +347,12 @@ class AlohaMazeEnv(AlohaEnv):
         model = self._env.physics.model.ptr
         data = self._env.physics.data.ptr
 
-    #     self.viewer = mj_viewer.launch_passive(
-    #     model=model,
-    #     data=data,
-    # )
+        self.viewer = mj_viewer.launch_passive(
+        model=model,
+        data=data,
+    )
         obs, info = super().reset()
-
+        random.seed(None)
         SELECTED_BOARD = random.randint(0, NUMBER_BOARDS)
         print(SELECTED_BOARD)
         for i in range(NUMBER_BOARDS + 1):
@@ -355,5 +364,5 @@ class AlohaMazeEnv(AlohaEnv):
                 # # Disable collisions by moving it far away
                 self._env.physics.model.body_pos[body_id] = [0, (1 + i), 40]
         self._env.physics.forward()       
-        #self.viewer.sync()
+        self.viewer.sync()
         return  obs, info

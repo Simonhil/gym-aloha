@@ -7,6 +7,7 @@ from gym_aloha.constants import (
     BLOCK_NAMES,
     BODY_NAMES_JOIN_BLOCKS,
     BODY_NAMES_PEG_CONSTRUCTION,
+    BOX_CONTENSE_NAMES,
     START_ARM_POSE,
     normalize_puppet_gripper_position,
     normalize_puppet_gripper_velocity,
@@ -118,7 +119,8 @@ class TransferCubeTask(BimanualViperXTask):
             physics.named.data.qpos[8:15] = START_ARM_POSE[7:]
             np.copyto(physics.data.ctrl, START_ARM_POSE)
             assert BOX_POSE[0] is not None
-            physics.named.data.qpos[-7:] = [0, 0 ,0.05, 0, 0, 0, 0]#BOX_POSE[0]
+            physics.named.data.qpos[-7:] =  BOX_POSE.pop(0)
+            BOX_POSE.pop
             # print(f"{BOX_POSE=}")
         super().initialize_episode(physics)
 
@@ -168,7 +170,7 @@ class BallMaze(BimanualViperXTask):
             physics.named.data.qpos[8:15] = START_ARM_POSE[7:]
             np.copyto(physics.data.ctrl, START_ARM_POSE)
             assert BOX_POSE[0] is not None
-            physics.named.data.qpos[-7:] = BOX_POSE[0]
+            physics.named.data.qpos[-7:] = [0, 0 , 0.05, 0 ,0 ,0 ,0]
             # print(f"{BOX_POSE=}")
         super().initialize_episode(physics)
 
@@ -294,8 +296,10 @@ class BlockStackingTask(BimanualViperXTask):
 
             for i in range(len(block_ids)):
                 assert len(BOX_POSE) != 0
-                physics.model.body_pos[block_ids[i]] = BOX_POSE[i][:3]
-                physics.model.body_quat[block_ids[i]] = BOX_POSE[i][3:]
+                joint_id = physics.model.body_jntadr[block_ids[i]]
+                qpos_addr = physics.model.jnt_qposadr[joint_id]
+                physics.data.qpos[qpos_addr:qpos_addr+3] = BOX_POSE[0][:3]
+                BOX_POSE.pop(0)
             # print(f"{BOX_POSE=}")
         super().initialize_episode(physics)
 
@@ -332,8 +336,11 @@ class PegConstructionTask(BimanualViperXTask):
 
                 for i in range(len(piece_ids)):
                     assert len(BOX_POSE) != 0
-                    physics.model.body_pos[piece_ids[i]] = BOX_POSE[i][:3]
-                    physics.model.body_quat[piece_ids[i]] = BOX_POSE[i][3:]
+                    print(BOX_POSE[0])
+                    joint_id = physics.model.body_jntadr[piece_ids[i]]
+                    qpos_addr = physics.model.jnt_qposadr[joint_id]
+                    physics.data.qpos[qpos_addr:qpos_addr+3] = BOX_POSE[0][:3]
+                    BOX_POSE.pop(0)
                 # print(f"{BOX_POSE=}")
             super().initialize_episode(physics)
 
@@ -369,8 +376,10 @@ class JoinBlocksTask(BimanualViperXTask):
 
                 for i in range(len(piece_ids)):
                     assert len(BOX_POSE) != 0
-                    physics.model.body_pos[piece_ids[i]] = BOX_POSE[i][:3]
-                    physics.model.body_quat[piece_ids[i]] = BOX_POSE[i][3:]
+                    joint_id = physics.model.body_jntadr[piece_ids[i]]
+                    qpos_addr = physics.model.jnt_qposadr[joint_id]
+                    physics.data.qpos[qpos_addr:qpos_addr+3] = BOX_POSE[0][:3]
+                    BOX_POSE.pop(0)
                 # print(f"{BOX_POSE=}")
             super().initialize_episode(physics)
 
@@ -383,3 +392,43 @@ class JoinBlocksTask(BimanualViperXTask):
             #TODO be implemented once needed
             
             return 0
+        
+
+class PutInBoxTask(BimanualViperXTask):
+    def __init__(self, random=None):
+        super().__init__(random=random)
+        self.max_reward = 4
+        self.num_blocks = 0
+
+    def initialize_episode(self, physics):
+        """Sets the state of the environment at the start of each episode."""
+        # TODO Notice: this function does not randomize the env configuration. Instead, set BOX_POSE from outside
+        # reset qpos, control and box position
+        with physics.reset_context():
+            #physics.named.data.qpos[:14] = START_ARM_POSE
+            physics.named.data.qpos[:7] = START_ARM_POSE[:7]
+            physics.named.data.qpos[8:15] = START_ARM_POSE[7:]
+            np.copyto(physics.data.ctrl, START_ARM_POSE)
+
+            block_ids = []
+            for name in BOX_CONTENSE_NAMES:
+                   block_ids.append(physics.model.name2id(name, 'body'))
+
+            for i in range(len(block_ids)):
+                assert len(BOX_POSE) != 0
+                joint_id = physics.model.body_jntadr[block_ids[i]]
+                qpos_addr = physics.model.jnt_qposadr[joint_id]
+                physics.data.qpos[qpos_addr:qpos_addr+3] = BOX_POSE[0][:3]
+                BOX_POSE.pop(0)
+            # print(f"{BOX_POSE=}")
+        super().initialize_episode(physics)
+
+    @staticmethod
+    def get_env_state(physics):
+        env_state = physics.data.qpos.copy()[16:]
+        return env_state
+
+    def get_reward(self, physics):
+        #TODO be implemented once needed
+        
+        return 0

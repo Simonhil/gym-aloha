@@ -5,9 +5,7 @@ def sample_box_pose(seed=None):
     x_range = [-0.1, 0.1]
     y_range = [-0.1, 0.1]
     z_range = [0.05, 0.05]
-
     rng = np.random.RandomState(seed)
-
     ranges = np.vstack([x_range, y_range, z_range])
     cube_position = rng.uniform(ranges[:, 0], ranges[:, 1])
 

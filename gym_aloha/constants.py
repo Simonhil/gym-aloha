@@ -72,10 +72,15 @@ BLOCK_NAMES = [
     "rectangle_3"
 ]
 
+###############put in box#############
+BOX_CONTENSE_NAMES = [
+        "cube"
+    ]
 
 
 ############################Ball Maze###################
-NUMBER_BOARDS=1
+MAZE_FILES=[5,10,15,20,15,30]
+NUMBER_BOARDS=4
 
 SELECTED_BOARD=1
 

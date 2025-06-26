@@ -38,7 +38,7 @@
             <inertial pos="0 0 0" mass="0.05" diaginertia="1e-1 1e-1 1e-1"/>
            
             <geom type="mesh" mesh="p_block1" rgba="0 0.5 0 1" />
-            <geom type="mesh" mesh="p_block1" class="collision"  friction="0.2 0.1 0.1" />
+            <geom type="mesh" mesh="p_block1" class="collision"  friction="0.5 0.5 0.5" />
 
             <geom type="mesh" mesh="p_block2" rgba="0.5 0.5 0 1" />
             <geom type="mesh" mesh="p_block2" class="collision"  friction="0.000002 0.00001 0.00001" />
@@ -61,7 +61,7 @@
             <inertial pos="0 0 0" mass="0.05" diaginertia="1e-1 1e-1 1e-1"/>
            
             <geom type="mesh" mesh="h_block1" rgba="0 0.5 0 1" />
-            <geom type="mesh" mesh="h_block1" class="collision"  friction="0.2 0.1 0.1" />
+            <geom type="mesh" mesh="h_block1" class="collision"  friction="0.5 0.5 0.5" />
 
             <geom type="mesh" mesh="h_block2" rgba="0 0.5 0.5 1" />
             <geom type="mesh" mesh="h_block2" class="collision"  friction="0.000002 0.00001 0.00001" />
@@ -90,11 +90,11 @@
             <geom type="mesh" mesh="wall2" rgba="0 0.5 0.5 1" />
             <geom type="mesh" mesh="wall2" class="collision"  friction="0.000002 0.00001 0.00001" />
 
-            <geom type="mesh" mesh="wall3" rgba="0 0.5 0.5 1" />
-            <geom type="mesh" mesh="wall3" class="collision"  friction="0.00002 0.00001 0.00001" />
+            <!-- <geom type="mesh" mesh="wall3" rgba="0 0.5 0.5 1" />
+            <geom type="mesh" mesh="wall3" class="collision"  friction="0.00002 0.00001 0.00001" /> -->
 
             <geom type="mesh" mesh="wall4" rgba="0 0.5 0.5 1" />
-            <geom type="mesh" mesh="wall4" class="collision"  friction="0.000002 0.00001 0.00001"/>
+            <geom type="mesh" mesh="wall4" class="collision"  friction="0.00000002 0.0000001 0.0000001"/>
 
 
         </body>
