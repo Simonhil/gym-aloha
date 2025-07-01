@@ -82,8 +82,7 @@ BOX_CONTENSE_NAMES = [
 MAZE_FILES=[5,10,15,20,15,30]
 NUMBER_BOARDS=4
 
-SELECTED_BOARD=1
-
+selected_board=7
 ###########################Peg construction#####################
 BODY_NAMES_PEG_CONSTRUCTION=[
     #"socket",

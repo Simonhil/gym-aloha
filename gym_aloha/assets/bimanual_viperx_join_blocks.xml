@@ -9,6 +9,8 @@
     <mesh name="h_block4" file="join_assets/hBlock/Part Studio 1 - Part 4.stl" scale="0.001 0.001 0.001"/>
     <mesh name="h_block5" file="join_assets/hBlock/Part Studio 1 - Part 5.stl" scale="0.001 0.001 0.001"/>
     <mesh name="h_block6" file="join_assets/hBlock/Part Studio 1 - Part 6.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="h_block7" file="join_assets/hBlock/Part Studio 1 - Part 7.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="h_block8" file="join_assets/hBlock/Part Studio 1 - Part 8.stl" scale="0.001 0.001 0.001"/>
 
    
    <!-- p block -->
@@ -43,7 +45,7 @@
             <geom type="mesh" mesh="p_block2" rgba="0.5 0.5 0 1" />
             <geom type="mesh" mesh="p_block2" class="collision"  friction="0.000002 0.00001 0.00001" />
 
-            <geom type="mesh" mesh="p_block3" rgba="0.5 0.5 0 1" />
+            <geom type="mesh" mesh="p_block3" rgba="0.5 0.5 0 1" name="block_peg"/>
             <geom type="mesh" mesh="p_block3" class="collision"  friction="0.000002 0.00001 0.00001" />
 
             <geom type="mesh" mesh="p_block4" rgba="0.5 0.5 0 1" />
@@ -77,6 +79,12 @@
 
             <geom type="mesh" mesh="h_block6" rgba="0 0.5 0.5 1" />
             <geom type="mesh" mesh="h_block6" class="collision"  friction="0.000002 0.00001 0.00001"/>
+            
+            
+            <!-- markers -->
+            <geom type="mesh" mesh="h_block7" rgba="0 0.5 0.5 0"  name="marker_wall"/>
+            <geom type="mesh" mesh="h_block8" rgba="0 0.5 0.5 0" name="marker_block"/>
+
 
         </body>
 
@@ -87,7 +95,7 @@
             <geom type="mesh" mesh="wall1" rgba="0 0.5 0 1" />
             <geom type="mesh" mesh="wall1" class="collision"  friction="0.2 0.1 0.1" />
 
-            <geom type="mesh" mesh="wall2" rgba="0 0.5 0.5 1" />
+            <geom type="mesh" mesh="wall2" rgba="0 0.5 0.5 1" name="wall_peg"/>
             <geom type="mesh" mesh="wall2" class="collision"  friction="0.000002 0.00001 0.00001" />
 
             <!-- <geom type="mesh" mesh="wall3" rgba="0 0.5 0.5 1" />

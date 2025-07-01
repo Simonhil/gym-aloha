@@ -6,14 +6,13 @@ from dm_control import mujoco
 import numpy as np
 import trimesh
 import gym_aloha
-from gym_aloha.constants import ASSETS_DIR
+from gym_aloha.constants import ASSETS_DIR, selected_board
 from mujoco import viewer as mj_viewer
 
 
-env = gym.make("gym_aloha/AlohaJoinBlocks-v0")
+env = gym.make("gym_aloha/AlohaBallMaze-v0")
 observation, info = env.reset()
 frames = []
-
 for i in range(1000):
     action = env.action_space.sample()
     #action = np.array([0 ,-0.96, 1.16 ,0 ,-0.3 ,0 ,-0.25,0 ,-0.96, 1.16 ,0 ,-0.3 ,0 ,0.014])

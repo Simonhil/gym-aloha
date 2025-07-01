@@ -8,6 +8,7 @@ from dm_control.rl import control
 from gymnasium import spaces
 from mujoco import viewer as mj_viewer
 import torch
+import gym_aloha.constants
 from gym_aloha.constants import (
     ACTIONS,
     ASSETS_DIR,
@@ -123,7 +124,7 @@ class AlohaEnv(gym.Env):
 
         self.viewer = mj_viewer.launch_passive(
         model=model,
-        data=data,
+        data=data
     )
        
 
@@ -247,7 +248,8 @@ class AlohaEnv(gym.Env):
             BOX_POSE.append(sample_box_pose(seed))  # used in sim reset
         elif self.task == "block_stacking":
             for i in range(len(BLOCK_NAMES)):
-                BOX_POSE.append(sample_box_pose(seed)) # used in sim reset
+                seed1=None
+                BOX_POSE.append(sample_box_pose(seed1)) # used in sim reset
                 print(BOX_POSE)
         elif self.task == "peg_construction":
             for i in range(len(BODY_NAMES_PEG_CONSTRUCTION)):
@@ -316,7 +318,6 @@ class AlohaEnv(gym.Env):
         else:
             observation=self.crop_img_in_observation(observation)
         truncated = False
-
         return observation, reward, terminated, truncated, info
 
     def close(self):
@@ -339,7 +340,7 @@ class AlohaMazeEnv(AlohaEnv):
    
     def reset(self, seed=None, options=None):
         self._env.close()
-        self.viewer.close()
+        #self.viewer.close()
 
         self._env = self._make_env_task(self.task)
 
@@ -347,22 +348,24 @@ class AlohaMazeEnv(AlohaEnv):
         model = self._env.physics.model.ptr
         data = self._env.physics.data.ptr
 
-        self.viewer = mj_viewer.launch_passive(
-        model=model,
-        data=data,
-    )
+    #     self.viewer = mj_viewer.launch_passive(
+    #     model=model,
+    #     data=data,
+    # )
         obs, info = super().reset()
         random.seed(None)
-        SELECTED_BOARD = random.randint(0, NUMBER_BOARDS)
-        print(SELECTED_BOARD)
+        selected=random.randint(0, NUMBER_BOARDS)
+        gym_aloha.constants.selected_board = selected
+        print("selected; " +str(gym_aloha.constants.selected_board))
         for i in range(NUMBER_BOARDS + 1):
-            if i == SELECTED_BOARD :
+            if i == selected :
                 continue
             else:
+                print(i)
                 body_id = self._env.physics.model.name2id(f"board{i}", 'body')
 
                 # # Disable collisions by moving it far away
-                self._env.physics.model.body_pos[body_id] = [0, (1 + i), 40]
+                self._env.physics.model.body_pos[body_id] = [0, (1 + i), 80]
         self._env.physics.forward()       
-        self.viewer.sync()
+        #self.viewer.sync()
         return  obs, info

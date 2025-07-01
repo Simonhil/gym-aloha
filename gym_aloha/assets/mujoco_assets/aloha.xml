@@ -160,7 +160,7 @@
                       <joint name="left/left_finger" class="left_finger"/>
                       <geom pos="0.0141637 0.0211727 0.06" class="visual" quat="1 1 1 -1" type="mesh"
                         mesh="vx300s_8_custom_finger_left"/>
-                      <geom pos="0.0141637 0.0211727 0.06" class="collision" quat="1 1 1 -1" type="mesh" mesh="vx300s_8_custom_finger_left"/>
+                      <geom pos="0.0141637 0.0211727 0.06" class="collision" quat="1 1 1 -1" type="mesh" mesh="vx300s_8_custom_finger_left" name="left_vx300s_8_custom_finger_left"/>
                       <!-- <geom name="left_left_finger_coll" class="collision" size="0.0137306 0.0460639" pos="0.0141512 -0.0347039 0.0119043" quat="0.544446 0.455511 0.456118 -0.536698"/>
                       <geom name="left/left_g0" pos="0.013  -0.0892 0.0268" class="sphere_collision"/>
                       <geom name="left/left_g1" pos="0.0222 -0.0892 0.0268" class="sphere_collision"/>
@@ -173,7 +173,7 @@
                       <joint name="left/right_finger" class="right_finger"/>
                       <geom pos="0.0141637 -0.0211727 0.0597067" class="visual" quat="1 -1 -1 -1" type="mesh"
                         mesh="vx300s_8_custom_finger_right"/>
-                      <geom pos="0.0141637 -0.0211727 0.0597067" class="collision" quat="1 -1 -1 -1" type="mesh" mesh="vx300s_8_custom_finger_right"/>
+                      <geom pos="0.0141637 -0.0211727 0.0597067" class="collision" quat="1 -1 -1 -1" type="mesh" mesh="vx300s_8_custom_finger_right" name="left_vx300s_8_custom_finger_right"/>
                       <!-- <geom name="left_right_finger_coll" class="collision" size="0.013729 0.0460644" pos="0.0141715 0.0347097 0.011759" quat="0.538959 -0.458738 -0.452903 -0.542183"/>
                       <geom name="left/right_g0" pos="0.013  0.0892 0.0268" class="sphere_collision"/>
                       <geom name="left/right_g1" pos="0.0222 0.0892 0.0268" class="sphere_collision"/>
@@ -251,7 +251,7 @@
                       <joint name="right/left_finger" class="left_finger"/>
                       <geom pos="0.0141637 0.0211727 0.06" class="visual" quat="1 1 1 -1" type="mesh"
                         mesh="vx300s_8_custom_finger_left"/>
-                      <geom pos="0.0141637 0.0211727 0.06" class="collision" quat="1 1 1 -1" type="mesh" mesh="vx300s_8_custom_finger_left"/>
+                      <geom pos="0.0141637 0.0211727 0.06" class="collision" quat="1 1 1 -1" type="mesh" mesh="vx300s_8_custom_finger_left" name="right_vx300s_8_custom_finger_left"/>
                       <!-- <geom name="right_left_finger_coll" class="collision" size="0.0137306 0.0460639" pos="0.0141512 -0.0347039 0.0119043" quat="0.544446 0.455511 0.456118 -0.536698"/>
                       <geom name="right/left_g0" pos="0.013  -0.0892 0.0268" class="sphere_collision"/>
                       <geom name="right/left_g1" pos="0.0222 -0.0892 0.0268" class="sphere_collision"/>
@@ -264,7 +264,7 @@
                       <joint name="right/right_finger" class="right_finger"/>
                       <geom pos="0.0141637 -0.0211727 0.0597067" class="visual" quat="1 -1 -1 -1" type="mesh"
                         mesh="vx300s_8_custom_finger_right"/>
-                      <geom pos="0.0141637 -0.0211727 0.0597067" class="collision" quat="1 -1 -1 -1" type="mesh" mesh="vx300s_8_custom_finger_right"/>
+                      <geom pos="0.0141637 -0.0211727 0.0597067" class="collision" quat="1 -1 -1 -1" type="mesh" mesh="vx300s_8_custom_finger_right" name="right_vx300s_8_custom_finger_right"/>
                       <!-- <geom name="right_right_finger_coll" class="collision" size="0.013729 0.0460644" pos="0.0141715 0.0347097 0.011759" quat="0.538959 -0.458738 -0.452903 -0.542183"/>
                       <geom name="right/right_g0" pos="0.013  0.0892 0.0268" class="sphere_collision"/>
                       <geom name="right/right_g1" pos="0.0222 0.0892 0.0268" class="sphere_collision"/>

@@ -33,7 +33,7 @@
                 <geom type="mesh" mesh="lid1" rgba="0.5 0.5 0 1" />
                 <geom type="mesh" mesh="lid1" class="collision"  friction="0.2 0.1 0.1" />
 
-                <geom type="mesh" mesh="lid2" rgba="0.5 0.5 0 1" />
+                <geom type="mesh" mesh="lid2" rgba="0.5 0.5 0 1" name="lid_front"/>
                 <geom type="mesh" mesh="lid2" class="collision"  friction="0.2 0.1 0.1" />
 
                 <geom type="mesh" mesh="lid3" rgba="0.5 0.5 0 1" />
@@ -45,7 +45,7 @@
 
             <body name="box" quat="1 0 0 1">
                 <inertial pos="0 0 0" mass="0.05" diaginertia="1e-1 1e-1 1e-1"/>
-                <geom type="mesh" mesh="box1" rgba="0 0.5 0 1" />
+                <geom type="mesh" mesh="box1" rgba="0 0.5 0 1" name="box_floor"/>
                 <geom type="mesh" mesh="box1" class="collision"  friction="0.2 0.1 0.1" />
 
                 <geom type="mesh" mesh="box2" rgba="0 0.5 0 1" />

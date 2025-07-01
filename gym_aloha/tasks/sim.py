@@ -2,7 +2,6 @@ import collections
 
 import numpy as np
 from dm_control.suite import base
-
 from gym_aloha.constants import (
     BLOCK_NAMES,
     BODY_NAMES_JOIN_BLOCKS,
@@ -13,6 +12,7 @@ from gym_aloha.constants import (
     normalize_puppet_gripper_velocity,
     unnormalize_puppet_gripper_position,
 )
+import gym_aloha.constants
 
 BOX_POSE = []  # to be changed from outside
 
@@ -139,9 +139,8 @@ class TransferCubeTask(BimanualViperXTask):
             name_geom_2 = physics.model.id2name(id_geom_2, "geom")
             contact_pair = (name_geom_1, name_geom_2)
             all_contact_pairs.append(contact_pair)
-
-        touch_left_gripper = ("red_box", "vx300s_left/10_left_gripper_finger") in all_contact_pairs
-        touch_right_gripper = ("red_box", "vx300s_right/10_right_gripper_finger") in all_contact_pairs
+        touch_left_gripper = ("red_box", "left_vx300s_8_custom_finger_right") in all_contact_pairs
+        touch_right_gripper = ("red_box", "right_vx300s_8_custom_finger_left") in all_contact_pairs
         touch_table = ("red_box", "table") in all_contact_pairs
 
         reward = 0
@@ -181,29 +180,22 @@ class BallMaze(BimanualViperXTask):
 
     def get_reward(self, physics):
         # return whether left gripper is holding the box
-        # all_contact_pairs = []
-        # for i_contact in range(physics.data.ncon):
-        #     id_geom_1 = physics.data.contact[i_contact].geom1
-        #     id_geom_2 = physics.data.contact[i_contact].geom2
-        #     name_geom_1 = physics.model.id2name(id_geom_1, "geom")
-        #     name_geom_2 = physics.model.id2name(id_geom_2, "geom")
-        #     contact_pair = (name_geom_1, name_geom_2)
-        #     all_contact_pairs.append(contact_pair)
+        selected_board = gym_aloha.constants.selected_board
+        marker_name=f"marker{selected_board}"
+        marker_id = physics.model.name2id(marker_name, 'geom')
+        marker_pos = physics.named.data.geom_xpos[marker_id][:2]
 
-        # touch_left_gripper = ("red_box", "vx300s_left/10_left_gripper_finger") in all_contact_pairs
-        # touch_right_gripper = ("red_box", "vx300s_right/10_right_gripper_finger") in all_contact_pairs
-        # touch_table = ("red_box", "table") in all_contact_pairs
-
-        # reward = 0
-        # if touch_right_gripper:
-        #     reward = 1
-        # if touch_right_gripper and not touch_table:  # lifted
-        #     reward = 2
-        # if touch_left_gripper:  # attempted transfer
-        #     reward = 3
-        # if touch_left_gripper and not touch_table:  # successful transfer
-        #     reward = 4
-        return 0
+        ball_name="blue_ball"
+        ball_id=physics.model.name2id(ball_name, 'geom')
+        ball_pos=physics.named.data.geom_xpos[ball_id][:2]
+    
+        diff = abs(ball_pos - marker_pos)
+        print(diff)
+        reward = 0
+        if diff[0] <0.001 and diff [1] <0.001:
+            reward = 4
+        else:reward = 0
+        return reward
 
 class InsertionTask(BimanualViperXTask):
     def __init__(self, random=None):
@@ -293,7 +285,7 @@ class BlockStackingTask(BimanualViperXTask):
             block_ids = []
             for name in BLOCK_NAMES:
                    block_ids.append(physics.model.name2id(name, 'body'))
-
+            print(BOX_POSE)
             for i in range(len(block_ids)):
                 assert len(BOX_POSE) != 0
                 joint_id = physics.model.body_jntadr[block_ids[i]]
@@ -389,9 +381,46 @@ class JoinBlocksTask(BimanualViperXTask):
             return env_state
 
         def get_reward(self, physics):
-            #TODO be implemented once needed
+             selected_board = gym_aloha.constants.selected_board
+            block_peg_name=f"block_peg"
+            block_peg_id = physics.model.name2id(block_peg_name, 'geom')
+            block_peg_pos = physics.named.data.geom_xpos[block_peg_id]
+          
+            wall_peg_name=f"wall_peg"
+            wall_peg_id = physics.model.name2id(wall_peg_name, 'geom')
+            wall_peg_pos = physics.named.data.geom_xpos[wall_peg_id]
+
+            wall_marker_name=f"marker_wall"
+            wall_marker_id = physics.model.name2id(wall_marker_name, 'geom')
+            wall_marker_pos = physics.named.data.geom_xpos[wall_marker_id]
+
+            block_marker_name=f"marker_block"
+            block_marker_id = physics.model.name2id(block_marker_name, 'geom')
+            block_marker_pos = physics.named.data.geom_xpos[block_marker_id]
+
+
+
+
+
+            diff_wall= abs(wall_peg_pos - wall_marker_pos)
+            reward_wall= 0
+            if diff_wall[0] <0.005 and diff_wall [1] <0.005 and diff_wall[2]<0.07:
+                reward_wall = 2
+            else:
+                reward_wall = 0
+
             
-            return 0
+            diff_block = abs(block_peg_pos - block_marker_pos)
+            print(diff_block)
+            reward_block = 0
+            if diff_block[0] < 0.003 and diff_block[1] < 0.003 and diff_block[2] < 0.05:
+                reward_block = 2
+            else:
+                reward_block = 0
+
+            
+            return reward_wall + reward_block
+            
         
 
 class PutInBoxTask(BimanualViperXTask):
@@ -429,6 +458,27 @@ class PutInBoxTask(BimanualViperXTask):
         return env_state
 
     def get_reward(self, physics):
-        #TODO be implemented once needed
-        
-        return 0
+        def get_reward(self, physics):
+        # return whether left gripper is holding the box
+        all_contact_pairs = []
+        for i_contact in range(physics.data.ncon):
+            id_geom_1 = physics.data.contact[i_contact].geom1
+            id_geom_2 = physics.data.contact[i_contact].geom2
+            name_geom_1 = physics.model.id2name(id_geom_1, "geom")
+            name_geom_2 = physics.model.id2name(id_geom_2, "geom")
+            contact_pair = (name_geom_1, name_geom_2)
+            all_contact_pairs.append(contact_pair)
+        touch_left_gripper = ("red_box", "left_vx300s_8_custom_finger_right") in all_contact_pairs
+        touch_right_gripper = ("red_box", "right_vx300s_8_custom_finger_left") in all_contact_pairs
+        box_closed=("lid_front", "box_floor") in all_contact_pairs
+        in_box=("red_box", "box_floor") in all_contact_pairs
+        touch_table = ("red_box", "table") in all_contact_pairs
+
+
+        reward=0
+        if in_box and box_closed:
+            reward=4
+        else:
+            reward = 0
+       
+        return reward
