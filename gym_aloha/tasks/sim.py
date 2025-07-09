@@ -190,9 +190,8 @@ class BallMaze(BimanualViperXTask):
         ball_pos=physics.named.data.geom_xpos[ball_id][:2]
     
         diff = abs(ball_pos - marker_pos)
-        print(diff)
         reward = 0
-        if diff[0] <0.001 and diff [1] <0.001:
+        if diff[0] <0.002 and diff [1] <0.002:
             reward = 4
         else:reward = 0
         return reward
@@ -381,7 +380,7 @@ class JoinBlocksTask(BimanualViperXTask):
             return env_state
 
         def get_reward(self, physics):
-             selected_board = gym_aloha.constants.selected_board
+            selected_board = gym_aloha.constants.selected_board
             block_peg_name=f"block_peg"
             block_peg_id = physics.model.name2id(block_peg_name, 'geom')
             block_peg_pos = physics.named.data.geom_xpos[block_peg_id]
@@ -411,7 +410,7 @@ class JoinBlocksTask(BimanualViperXTask):
 
             
             diff_block = abs(block_peg_pos - block_marker_pos)
-            print(diff_block)
+
             reward_block = 0
             if diff_block[0] < 0.003 and diff_block[1] < 0.003 and diff_block[2] < 0.05:
                 reward_block = 2
@@ -458,7 +457,6 @@ class PutInBoxTask(BimanualViperXTask):
         return env_state
 
     def get_reward(self, physics):
-        def get_reward(self, physics):
         # return whether left gripper is holding the box
         all_contact_pairs = []
         for i_contact in range(physics.data.ncon):

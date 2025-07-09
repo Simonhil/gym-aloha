@@ -122,10 +122,10 @@ class AlohaEnv(gym.Env):
         model = self._env.physics.model.ptr
         data = self._env.physics.data.ptr
 
-        self.viewer = mj_viewer.launch_passive(
-        model=model,
-        data=data
-    )
+    #     self.viewer = mj_viewer.launch_passive(
+    #     model=model,
+    #     data=data
+    # )
        
 
 
@@ -239,7 +239,7 @@ class AlohaEnv(gym.Env):
         if seed is not None:
             self._env.task.random.seed(seed)
             self._env.task._random = np.random.RandomState(seed)
-
+        seed=None
         if self.task == "transfer_cube":
              BOX_POSE.append(sample_box_pose(seed))  # used in sim reset
         elif self.task == "insertion":
@@ -248,8 +248,7 @@ class AlohaEnv(gym.Env):
             BOX_POSE.append(sample_box_pose(seed))  # used in sim reset
         elif self.task == "block_stacking":
             for i in range(len(BLOCK_NAMES)):
-                seed1=None
-                BOX_POSE.append(sample_box_pose(seed1)) # used in sim reset
+                BOX_POSE.append(sample_box_pose(seed)) # used in sim reset
                 print(BOX_POSE)
         elif self.task == "peg_construction":
             for i in range(len(BODY_NAMES_PEG_CONSTRUCTION)):
@@ -306,7 +305,7 @@ class AlohaEnv(gym.Env):
 
         _, reward, _, raw_obs = self._env.step(action)
         
-        self.viewer.sync()
+        #self.viewer.sync()
 
         # TODO(rcadene): add an enum
         terminated = is_success = reward == 4
