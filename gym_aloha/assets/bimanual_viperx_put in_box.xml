@@ -30,17 +30,17 @@
                 <joint name="pblock_joint" type="hinge" pos="0 -0.2 0.085" axis="1 0 0" range="0 90"/>
                 <inertial pos="0 0 0" mass="0.25" diaginertia="1e-2 1e-2 1e-2"/>
             
-                <geom type="mesh" mesh="lid1" rgba="0.5 0.5 0 1" />
-                <geom type="mesh" mesh="lid1" class="collision"  friction="0.2 0.1 0.1" />
+                <geom type="mesh" mesh="lid1" rgba="0.5 0.5 0 1" name="lid1"/>
+                <geom type="mesh" mesh="lid1" class="collision"  friction="0.2 0.1 0.1" name="lid2"/>
 
-                <geom type="mesh" mesh="lid2" rgba="0.5 0.5 0 1" name="lid_front"/>
-                <geom type="mesh" mesh="lid2" class="collision"  friction="0.2 0.1 0.1" />
+                <geom type="mesh" mesh="lid2" rgba="0.5 0.5 0 1" name="lid3"/>
+                <geom type="mesh" mesh="lid2" class="collision"  friction="0.2 0.1 0.1" name="lid4"/>
 
                 <geom type="mesh" mesh="lid3" rgba="0.5 0.5 0 1" />
-                <geom type="mesh" mesh="lid3" class="collision"  friction="0.2 0.1 0.1" />
+                <geom type="mesh" mesh="lid3" class="collision"  friction="0.2 0.1 0.1" name="lid_rod"/>
 
                 <geom type="mesh" mesh="lid4" rgba="0.5 0.5 0 1" />
-                <geom type="mesh" mesh="lid4" class="collision"  friction="0.2 0.1 0.1" />
+                <geom type="mesh" mesh="lid4" class="collision"  friction="0.2 0.1 0.1" name="lid_rod2"/>
             </body>
 
             <body name="box" quat="1 0 0 1">

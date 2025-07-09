@@ -82,8 +82,8 @@
             
             
             <!-- markers -->
-            <geom type="mesh" mesh="h_block7" rgba="0 0.5 0.5 0"  name="marker_wall"/>
-            <geom type="mesh" mesh="h_block8" rgba="0 0.5 0.5 0" name="marker_block"/>
+            <geom type="mesh" mesh="h_block7" rgba="0 0.5 0.5 0"  name="marker_wall"  class="visual" friction="0 0 0" mass="0"/>
+            <geom type="mesh" mesh="h_block8" rgba="0 0.5 0.5 0" name="marker_block" class="visual" friction="0 0 0" mass="0"/>
 
 
         </body>
