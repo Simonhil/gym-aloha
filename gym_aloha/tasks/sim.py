@@ -467,16 +467,32 @@ class PutInBoxTask(BimanualViperXTask):
             contact_pair = (name_geom_1, name_geom_2)
             all_contact_pairs.append(contact_pair)
         touch_left_gripper = ("red_box", "left_vx300s_8_custom_finger_right") in all_contact_pairs
-        touch_right_gripper = ("red_box", "right_vx300s_8_custom_finger_left") in all_contact_pairs
-        box_closed=("lid_front", "box_floor") in all_contact_pairs
-        in_box=("red_box", "box_floor") in all_contact_pairs
+        touch_right_gripper=any(
+        "right_vx300s_8_custom_finger_left" in pair for pair in all_contact_pairs
+        )
+        box_closed=("lid_front", "marker") in all_contact_pairs
+        in_box=("red_box", "marker") in all_contact_pairs
         touch_table = ("red_box", "table") in all_contact_pairs
 
 
-        reward=0
-        if in_box and box_closed:
-            reward=4
-        else:
-            reward = 0
+        # reward=0
+        # if in_box and box_closed:
+        #     reward=4
+        # else:
+        #     reward = 0
+
+        marker_name=f"marker"
+        marker_id = physics.model.name2id(marker_name, 'geom')
+        marker_pos = physics.named.data.geom_xpos[marker_id]
+        
+        red_block_name=f"red_box"
+        red_block_id = physics.model.name2id(red_block_name, 'geom')
+        red_block_pos = physics.named.data.geom_xpos[red_block_id]
        
+        diff_red_block_in= abs(marker_pos - red_block_pos)
+        print(diff_red_block_in)
+        reward= 0
+        if diff_red_block_in[0] <0.08 and diff_red_block_in [1] <0.08 and diff_red_block_in[2]<0.3 and not touch_right_gripper:
+            reward= 4
+        print(reward)
         return reward

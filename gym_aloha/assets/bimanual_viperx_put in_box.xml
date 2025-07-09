@@ -16,7 +16,7 @@
     <mesh name="box3" file="take_from_box/box/Part Studio 1 - Part 3.stl" scale="0.001 0.001 0.001"/>
     <mesh name="box4" file="take_from_box/box/Part Studio 1 - Part 4.stl" scale="0.001 0.001 0.001"/>
     <mesh name="box5" file="take_from_box/box/Part Studio 1 - Part 5.stl" scale="0.001 0.001 0.001"/>
-
+    <mesh name="marker" file="take_from_box/box/Part Studio 1 - Part 10.stl" scale="0.001 0.001 0.001"/>
     </asset>
        
 
@@ -60,6 +60,8 @@
                 <geom type="mesh" mesh="box5" rgba="0 0.5 0 1" />
                 <geom type="mesh" mesh="box5" class="collision"  friction="0.2 0.1 0.1" />
 
+                <geom type="mesh" mesh="marker" class="visual"  mass="0" name="marker" rgba=" 1 0 0 0"/>
+                <!-- <geom type="mesh" mesh="box5" class="collision"  mass="0" name="marker" friction="0" /> -->
             </body>
 
         </body>
