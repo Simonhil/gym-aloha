@@ -150,7 +150,7 @@ class TransferCubeTask(BimanualViperXTask):
             reward = 2
         if touch_left_gripper:  # attempted transfer
             reward = 3
-        if touch_left_gripper and not touch_table:  # successful transfer
+        if touch_left_gripper and not touch_table and not touch_right_gripper :  # successful transfer
             reward = 4
         return reward
 
