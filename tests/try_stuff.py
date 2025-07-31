@@ -10,33 +10,34 @@ from gym_aloha.constants import ASSETS_DIR, selected_board
 from mujoco import viewer as mj_viewer
 
 
-env = gym.make("gym_aloha/AlohaBallMaze-v0")
+env = gym.make("gym_aloha/AlohaBockStacking-v0")
 observation, info = env.reset()
 frames = []
-for i in range(1000):
+for i in range(100):
     action = env.action_space.sample()
     #action = np.array([0 ,-0.96, 1.16 ,0 ,-0.3 ,0 ,-0.25,0 ,-0.96, 1.16 ,0 ,-0.3 ,0 ,0.014])
     #print(len(action))
     observation, reward, terminated, truncated, info = env.step(action)
     image = env.render()
-    frames.append(image["wrist_cam_right"])
-    combined = np.concatenate(list(image.values()), axis=1)
+    # frames.append(image["wrist_cam_right"])
+    # combined = np.concatenate(list(image.values()), axis=1)
 
     # Show with OpenCV
     scale_factor = 0.75
     combined = np.concatenate(list(image.values()), axis=1)
     resized = cv2.resize(combined, None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_LINEAR)
-    cv2.imshow("Multi-Camera Views", resized [..., ::-1])  # RGB to BGR
+    # cv2.imshow("Multi-Camera Views", resized [..., ::-1])  # RGB to BGR
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+    # if cv2.waitKey(1) & 0xFF == ord('q'):
+    #     break
 
     if terminated or truncated:
         observation, info = env.reset()
     # # env.reset()
-    # env.reset()
-    # print("test")
-    # time.sleep(4)
+    env.reset()
+    print("test")
+    time.sleep(4)
+     
 
 env.close()
 cv2.destroyAllWindows()

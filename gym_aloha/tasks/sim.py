@@ -164,7 +164,7 @@ class BallMaze(BimanualViperXTask):
         # TODO Notice: this function does not randomize the env configuration. Instead, set BOX_POSE from outside
         # reset qpos, control and box position
         with physics.reset_context():
-            #physics.named.data.qpos[:14] = START_ARM_POSE
+            #physics.named.data.qpos[:14BimanualViperXTask] = START_ARM_POSE
             physics.named.data.qpos[:7] = START_ARM_POSE[:7]
             physics.named.data.qpos[8:15] = START_ARM_POSE[7:]
             np.copyto(physics.data.ctrl, START_ARM_POSE)
@@ -279,7 +279,7 @@ class BlockStackingTask(BimanualViperXTask):
             #physics.named.data.qpos[:14] = START_ARM_POSE
             physics.named.data.qpos[:7] = START_ARM_POSE[:7]
             physics.named.data.qpos[8:15] = START_ARM_POSE[7:]
-            np.copyto(physics.data.ctrl, START_ARM_POSE)
+            np.copyto(physics.data.ctrl,START_ARM_POSE)
 
             block_ids = []
             for name in BLOCK_NAMES:
@@ -298,9 +298,35 @@ class BlockStackingTask(BimanualViperXTask):
     def get_env_state(physics):
         env_state = physics.data.qpos.copy()[16:]
         return env_state
+       
 
     def get_reward(self, physics):
-        #TODO be implemented once needed
+        all_contact_pairs = []
+        for i_contact in range(physics.data.ncon):
+            id_geom_1 = physics.data.contact[i_contact].geom1
+            id_geom_2 = physics.data.contact[i_contact].geom2
+            name_geom_1 = physics.model.id2name(id_geom_1, "geom")
+            name_geom_2 = physics.model.id2name(id_geom_2, "geom")
+            contact_pair = (name_geom_1, name_geom_2)
+            all_contact_pairs.append(contact_pair)
+
+        beam_and_block= ("red_box", "pink_rectangle") in all_contact_pairs
+        block1_and_beam= ("green_rectangle", "pink_rectangle") in all_contact_pairs
+        block2_and_beam= ("blue_rectangle", "pink_rectangle") in all_contact_pairs
+        
+
+        beam_touch_table = ("pink_rectangle", "table") in all_contact_pairs
+        block1_touch_table = ("green_rectangle", "table") in all_contact_pairs
+        block2_touch_table = ("blue_rectangle", "table") in all_contact_pairs
+
+        left_free=any(
+        "left_vx300s_8_custom_finger_left" in pair for pair in all_contact_pairs
+        )
+        right_free = any(
+        "right_vx300s_8_custom_finger_left" in pair for pair in all_contact_pairs
+        )
+        if beam_and_block and block1_and_beam and block2_and_beam and not beam_touch_table and not block1_touch_table and not block2_touch_table and right_free and left_free:
+            return 4
         
         return 0
 
@@ -490,9 +516,9 @@ class PutInBoxTask(BimanualViperXTask):
         red_block_pos = physics.named.data.geom_xpos[red_block_id]
        
         diff_red_block_in= abs(marker_pos - red_block_pos)
-        print(diff_red_block_in)
+    
         reward= 0
         if diff_red_block_in[0] <0.08 and diff_red_block_in [1] <0.08 and diff_red_block_in[2]<0.3 and not touch_right_gripper:
             reward= 4
-        print(reward)
+       
         return reward

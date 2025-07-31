@@ -636,7 +636,7 @@
                 <geom type="mesh" mesh="marker_9" rgba="1 0 1 0.2" class="visual" friction="0.0002 0.0001 0.0001" mass="0"/>
             </body> -->
 
-            <body name="board0">
+            <!-- <body name="board0">
                 <inertial pos="0 0 0" mass="0.0000050" diaginertia="1e-5 1e-5 1e-5"/>
                 <geom type="mesh" mesh="frame1" class="visual"/>
                 <geom type="mesh" mesh="frame1" class="collision" friction="0.05 0.05 0.001"/>
@@ -671,7 +671,7 @@
                 <geom type="mesh" mesh="board6.10" class="visual"/>
                 <geom type="mesh" mesh="board6.10" class="collision" friction="0.0002 0.0001 0.0001"/>
                 <geom type="mesh" mesh="marker_10" rgba="1 0 1 0.2" class="visual" friction="0.0002 0.0001 0.0001" mass="0" name="marker0"/>
-            </body>
+            </body> -->
 
             <body name="board1">
                 <inertial pos="0 0 0" mass="0.0000050" diaginertia="1e-5 1e-5 1e-5"/>
@@ -819,6 +819,43 @@
                 <geom type="mesh" mesh="board6.14" class="visual"/>
                 <geom type="mesh" mesh="board6.14" class="collision" friction="0.0002 0.0001 0.0001"/>
                 <geom type="mesh" mesh="marker_14" rgba="1 0 1 0.2" class="visual" friction="0.0002 0.0001 0.0001" mass="0" name="marker4"/>
+            </body>
+
+            <body name="board0">
+                <inertial pos="0 0 0" mass="0.0000050" diaginertia="1e-5 1e-5 1e-5"/>
+                <geom type="mesh" mesh="frame1" class="visual"/>
+                <geom type="mesh" mesh="frame1" class="collision" friction="0.05 0.05 0.001"/>
+                <geom type="mesh" mesh="frame2" class="visual"/>
+                <geom type="mesh" mesh="frame2" class="collision" friction="0.05 0.05 0.001"/>
+                <geom type="mesh" mesh="frame3" class="visual"/>
+                <geom type="mesh" mesh="frame3" class="collision" friction="0.05 0.05 0.001"/>
+                <geom type="mesh" mesh="frame4" class="visual"/>
+                <geom type="mesh" mesh="frame4" class="collision" friction="0.05 0.05 0.001"/>
+                <geom type="mesh" mesh="frame5" class="visual"/>
+                <geom type="mesh" mesh="frame5" class="collision" friction="0.05 0.05 0.001"/>
+                <geom type="mesh" mesh="frame6" class="visual"/>
+                <geom type="mesh" mesh="frame6" class="collision" friction="0.05 0.05 0.001"/>
+                <geom type="mesh" mesh="frame7" class="visual"/>
+                <geom type="mesh" mesh="frame7" class="collision" friction="0.05 0.05 0.001"/>
+                <geom type="mesh" mesh="frame8" class="visual"/>
+                <geom type="mesh" mesh="frame8" class="collision" friction="0.05 0.05 0.001"/>
+                <geom type="mesh" mesh="frame9" class="visual"/>
+                <geom type="mesh" mesh="frame9" class="collision" friction="0.05 0.05 0.001"/>
+                <geom type="mesh" mesh="frame10" class="visual"/>
+                <geom type="mesh" mesh="frame10" class="collision" friction="0.05 0.05 0.001"/>
+                <geom type="mesh" mesh="board1.14" class="visual"/>
+                <geom type="mesh" mesh="board1.14" class="collision" friction="0.0002 0.0001 0.0001"/>
+                <geom type="mesh" mesh="board2.14" class="visual"/>
+                <geom type="mesh" mesh="board2.14" class="collision" friction="0.0002 0.0001 0.0001"/>
+                <geom type="mesh" mesh="board3.14" class="visual"/>
+                <geom type="mesh" mesh="board3.14" class="collision" friction="0.0002 0.0001 0.0001"/>
+                <geom type="mesh" mesh="board4.14" class="visual"/>
+                <geom type="mesh" mesh="board4.14" class="collision" friction="0.0002 0.0001 0.0001"/>
+                <geom type="mesh" mesh="board5.14" class="visual"/>
+                <geom type="mesh" mesh="board5.14" class="collision" friction="0.0002 0.0001 0.0001"/>
+                <geom type="mesh" mesh="board6.14" class="visual"/>
+                <geom type="mesh" mesh="board6.14" class="collision" friction="0.0002 0.0001 0.0001"/>
+                <geom type="mesh" mesh="marker_14" rgba="1 0 1 0.2" class="visual" friction="0.0002 0.0001 0.0001" mass="0" name="marker0"/>
             </body>
 
             <!-- <body name="board15">

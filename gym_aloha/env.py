@@ -19,13 +19,14 @@ from gym_aloha.constants import (
     JOINTS,
     MAZE_FILES,
     NUMBER_BOARDS,
+    BOX_CONTENSE_NAMES,
 )
 from gym_aloha.tasks.sim import BOX_POSE, BallMaze, BlockStackingTask, InsertionTask, JoinBlocksTask, PegConstructionTask, PutInBoxTask, TransferCubeTask
 from gym_aloha.tasks.sim_end_effector import (
     InsertionEndEffectorTask,
     TransferCubeEndEffectorTask,
 )
-from gym_aloha.utils import sample_box_pose, sample_insertion_pose
+from gym_aloha.utils import sample_box_pose, sample_insertion_pose, sample_put_in_box_pose, sample_block_stacking
 
 
 class AlohaEnv(gym.Env):
@@ -122,10 +123,10 @@ class AlohaEnv(gym.Env):
         model = self._env.physics.model.ptr
         data = self._env.physics.data.ptr
 
-    #     self.viewer = mj_viewer.launch_passive(
-    #     model=model,
-    #     data=data
-    # )
+        self.viewer = mj_viewer.launch_passive(
+        model=model,
+        data=data
+    )
        
 
 
@@ -247,9 +248,9 @@ class AlohaEnv(gym.Env):
         elif self.task == "test":
             BOX_POSE.append(sample_box_pose(seed))  # used in sim reset
         elif self.task == "block_stacking":
+            positions=sample_block_stacking(seed)
             for i in range(len(BLOCK_NAMES)):
-                BOX_POSE.append(sample_box_pose(seed)) # used in sim reset
-                print(BOX_POSE)
+                BOX_POSE.append(positions[i]) # used in sim reset
         elif self.task == "peg_construction":
             for i in range(len(BODY_NAMES_PEG_CONSTRUCTION)):
                 BOX_POSE.append(sample_box_pose(seed)) # used in sim reset
@@ -261,13 +262,13 @@ class AlohaEnv(gym.Env):
         elif self.task == "ball_maze":
              BOX_POSE.append(sample_box_pose(seed))  # used in sim reset
         elif self.task == "put_in_box":
-            for i in range(len(BLOCK_NAMES)):
-                BOX_POSE.append(sample_box_pose(seed)) # used in sim reset
+            for i in range(len(BOX_CONTENSE_NAMES)):
+                BOX_POSE.append(sample_put_in_box_pose(seed)) # used in sim reset
         else:
             raise ValueError(self.task)
-
         raw_obs = self._env.reset()
 
+       
         observation = self._format_raw_obs(raw_obs.observation)
         if "pixels" in observation:
             observation["pixels"] = self.crop_img_in_observation(observation["pixels"])
@@ -277,6 +278,7 @@ class AlohaEnv(gym.Env):
         info = {"is_success": False}
         #self.viewer.sync()
         return observation, info
+
     
     def crop_img_in_observation(self,observation):
      
@@ -305,7 +307,7 @@ class AlohaEnv(gym.Env):
 
         _, reward, _, raw_obs = self._env.step(action)
         
-        #self.viewer.sync()
+        self.viewer.sync()
 
         # TODO(rcadene): add an enum
         terminated = is_success = reward == 4
