@@ -179,7 +179,27 @@ class BallMaze(BimanualViperXTask):
         return env_state
 
     def get_reward(self, physics):
-        # return whether left gripper is holding the box
+        #check if both hand are thouching the board
+        all_contact_pairs=[]
+        for i_contact in range(physics.data.ncon):
+            id_geom_1 = physics.data.contact[i_contact].geom1
+            id_geom_2 = physics.data.contact[i_contact].geom2
+            name_geom_1 = physics.model.id2name(id_geom_1, "geom")
+            name_geom_2 = physics.model.id2name(id_geom_2, "geom")
+            contact_pair = (name_geom_1, name_geom_2)
+            all_contact_pairs.append(contact_pair)
+
+        touch_right_gripper=any(
+        "right_vx300s_8_custom_finger_left" in pair for pair in all_contact_pairs
+        )
+
+        touch_left_gripper=any(
+        "left_vx300s_8_custom_finger_left" in pair for pair in all_contact_pairs
+        )
+
+        touch_gripper= touch_right_gripper and touch_left_gripper
+
+        #check if ball is in hole
         selected_board = gym_aloha.constants.selected_board
         marker_name=f"marker{selected_board}"
         marker_id = physics.model.name2id(marker_name, 'geom')
@@ -191,7 +211,7 @@ class BallMaze(BimanualViperXTask):
     
         diff = abs(ball_pos - marker_pos)
         reward = 0
-        if diff[0] <0.002 and diff [1] <0.002:
+        if diff[0] <0.002 and diff [1] <0.002 and touch_gripper:
             reward = 4
         else:reward = 0
         return reward
@@ -310,25 +330,27 @@ class BlockStackingTask(BimanualViperXTask):
             contact_pair = (name_geom_1, name_geom_2)
             all_contact_pairs.append(contact_pair)
 
-        beam_and_block= ("red_box", "pink_rectangle") in all_contact_pairs
-        block1_and_beam= ("green_rectangle", "pink_rectangle") in all_contact_pairs
-        block2_and_beam= ("blue_rectangle", "pink_rectangle") in all_contact_pairs
+        beam_and_block= ("red_box", "pink_rectangle")in all_contact_pairs or tuple(reversed(("red_box", "pink_rectangle")))in all_contact_pairs
+        block1_and_beam= ("green_rectangle", "pink_rectangle")in all_contact_pairs or tuple(reversed(("green_rectangle", "pink_rectangle")))in all_contact_pairs
+        block2_and_beam= ("blue_rectangle", "pink_rectangle")in all_contact_pairs or tuple(reversed(("blue_rectangle", "pink_rectangle")))in all_contact_pairs
         
 
-        beam_touch_table = ("pink_rectangle", "table") in all_contact_pairs
-        block1_touch_table = ("green_rectangle", "table") in all_contact_pairs
-        block2_touch_table = ("blue_rectangle", "table") in all_contact_pairs
+        beam_touch_table = ("pink_rectangle", "table")in all_contact_pairs or tuple(reversed(("pink_rectangle", "table")))in all_contact_pairs
+        block1_touch_table = ("green_rectangle", "table")in all_contact_pairs or tuple(reversed(("green_rectangle", "table") ))in all_contact_pairs
+        block2_touch_table = ("blue_rectangle", "table")in all_contact_pairs  or tuple(reversed(("blue_rectangle", "table"))) in all_contact_pairs
 
-        left_free=any(
+        left_free= not any(
         "left_vx300s_8_custom_finger_left" in pair for pair in all_contact_pairs
         )
-        right_free = any(
+        right_free = not any(
         "right_vx300s_8_custom_finger_left" in pair for pair in all_contact_pairs
         )
-        if beam_and_block and block1_and_beam and block2_and_beam and not beam_touch_table and not block1_touch_table and not block2_touch_table and right_free and left_free:
-            return 4
-        
-        return 0
+    
+        reward=0
+        if beam_and_block and block1_and_beam and block2_and_beam and (not beam_touch_table) and (not block1_touch_table )and (not block2_touch_table) and right_free and left_free:
+            reward = 4
+     
+        return reward
 
         
 class PegConstructionTask(BimanualViperXTask):
@@ -397,7 +419,7 @@ class JoinBlocksTask(BimanualViperXTask):
                     qpos_addr = physics.model.jnt_qposadr[joint_id]
                     physics.data.qpos[qpos_addr:qpos_addr+3] = BOX_POSE[0][:3]
                     BOX_POSE.pop(0)
-                # print(f"{BOX_POSE=}")
+                print(f"{BOX_POSE}")
             super().initialize_episode(physics)
 
         @staticmethod
@@ -429,7 +451,7 @@ class JoinBlocksTask(BimanualViperXTask):
 
             diff_wall= abs(wall_peg_pos - wall_marker_pos)
             reward_wall= 0
-            if diff_wall[0] <0.005 and diff_wall [1] <0.005 and diff_wall[2]<0.07:
+            if diff_wall[0] <0.005 and diff_wall [1] <0.005 and diff_wall[2]<0.01:
                 reward_wall = 2
             else:
                 reward_wall = 0
@@ -438,12 +460,12 @@ class JoinBlocksTask(BimanualViperXTask):
             diff_block = abs(block_peg_pos - block_marker_pos)
 
             reward_block = 0
-            if diff_block[0] < 0.003 and diff_block[1] < 0.003 and diff_block[2] < 0.05:
+            if diff_block[0] < 0.005 and diff_block[1] < 0.005 and diff_block[2] < 0.05:
                 reward_block = 2
             else:
                 reward_block = 0
 
-            
+          
             return reward_wall + reward_block
             
         
@@ -520,5 +542,5 @@ class PutInBoxTask(BimanualViperXTask):
         reward= 0
         if diff_red_block_in[0] <0.08 and diff_red_block_in [1] <0.08 and diff_red_block_in[2]<0.3 and not touch_right_gripper:
             reward= 4
-       
+   
         return reward
