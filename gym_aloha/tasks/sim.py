@@ -203,17 +203,20 @@ class BallMaze(BimanualViperXTask):
         selected_board = gym_aloha.constants.selected_board
         marker_name=f"marker{selected_board}"
         marker_id = physics.model.name2id(marker_name, 'geom')
-        marker_pos = physics.named.data.geom_xpos[marker_id][:2]
+        marker_pos = physics.named.data.geom_xpos[marker_id]
 
         ball_name="blue_ball"
         ball_id=physics.model.name2id(ball_name, 'geom')
-        ball_pos=physics.named.data.geom_xpos[ball_id][:2]
-    
-        diff = abs(ball_pos - marker_pos)
+        ball_pos=physics.named.data.geom_xpos[ball_id]
+
+        diff = marker_pos - ball_pos
+        diff = np.linalg.norm(diff)
         reward = 0
-        if diff[0] <0.002 and diff [1] <0.002 and touch_gripper:
+        if diff <0.01  and touch_gripper:
             reward = 4
         else:reward = 0
+        print(diff)
+        print(reward)
         return reward
 
 class InsertionTask(BimanualViperXTask):

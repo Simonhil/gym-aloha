@@ -123,10 +123,10 @@ class AlohaEnv(gym.Env):
         model = self._env.physics.model.ptr
         data = self._env.physics.data.ptr
 
-        self.viewer = mj_viewer.launch_passive(
-        model=model,
-        data=data
-    )
+    #     self.viewer = mj_viewer.launch_passive(
+    #     model=model,
+    #     data=data
+    # )
        
 
 
@@ -307,7 +307,7 @@ class AlohaEnv(gym.Env):
 
         _, reward, _, raw_obs = self._env.step(action)
         
-        self.viewer.sync()
+        #self.viewer.sync()
 
         # TODO(rcadene): add an enum
         terminated = is_success = reward == 4
