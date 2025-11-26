@@ -18,7 +18,7 @@ register(
     # so we set `nondeterministic=True` to pass `check_env` tests
     nondeterministic=True,
     #kwargs={"obs_type": "pixels_agent_pos", "task": "transfer_cube"},
-    kwargs={"obs_type": "pixels", "task": "transfer_cube"},
+    kwargs={"obs_type": "pixels", "task": "transfer_cube", "task_description":"pick up red cube and transfer it from right to left "},
 )
 
 register(
@@ -29,7 +29,7 @@ register(
     # so we set `nondeterministic=True` to pass `check_env` tests
     nondeterministic=True,
     #kwargs={"obs_type": "pixels_agent_pos", "task": "transfer_cube"},
-    kwargs={"obs_type": "pixels_agent_pos", "task": "transfer_cube"},
+    kwargs={"obs_type": "pixels_agent_pos", "task": "pick up red cube and transfer it from right to left ", "task_description":"pick up red cube and transfer it from right to left "},
 )
 
 
@@ -41,7 +41,7 @@ register(
     # Even after seeding, the rendered observations are slightly different,
     # so we set `nondeterministic=True` to pass `check_env` tests
     nondeterministic=True,
-    kwargs={"obs_type": "pixels_agent_pos", "task": "test"},
+    kwargs={"obs_type": "pixels_agent_pos", "task": "pick up red cube and transfer it from right to left ", "task_description":"pick up red cube and transfer it from right to left "},
 )
 
 register(
@@ -51,7 +51,7 @@ register(
     # Even after seeding, the rendered observations are slightly different,
     # so we set `nondeterministic=True` to pass `check_env` tests
     nondeterministic=True,
-    kwargs={"obs_type": "pixels_agent_pos", "task": "block_stacking"},
+    kwargs={"obs_type": "pixels_agent_pos", "task": "place the yellow block on the red one and stack put the other two simultaniously on the yellow block ", "task_description":"place the yellow block on the red one and stack put the other two simultaniously on the yellow block "},
 )
 
 register(
@@ -61,7 +61,7 @@ register(
     # Even after seeding, the rendered observations are slightly different,
     # so we set `nondeterministic=True` to pass `check_env` tests
     nondeterministic=True,
-    kwargs={"obs_type": "pixels_agent_pos", "task": "ball_maze"},
+    kwargs={"obs_type": "pixels_agent_pos", "task": "move the board so that the blue ball hits the pink hexagon", "task_description":"move the board so that the blue ball hits the pink hexagon"},
 )
 register(
     id="gym_aloha/AlohaPegConstruction-v0",
@@ -80,7 +80,7 @@ register(
     # Even after seeding, the rendered observations are slightly different,
     # so we set `nondeterministic=True` to pass `check_env` tests
     nondeterministic=True,
-    kwargs={"obs_type": "pixels_agent_pos", "task":"join_blocks"},
+    kwargs={"obs_type": "pixels_agent_pos", "task":"join the two blocks and hang them on the wall" , "task_description": "join the two blocks and hang them on the wall"},
 )
 
 register(
@@ -90,5 +90,5 @@ register(
     # Even after seeding, the rendered observations are slightly different,
     # so we set `nondeterministic=True` to pass `check_env` tests
     nondeterministic=True,
-    kwargs={"obs_type": "pixels_agent_pos", "task":"put_in_box"},
+    kwargs={"obs_type": "pixels_agent_pos", "task":"pick up the block, open the box and place the blcok into the box", "task_description":"pick up the block, open the box and place the blcok into the box" },
 )

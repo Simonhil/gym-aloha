@@ -240,7 +240,6 @@ class AlohaEnv(gym.Env):
         if seed is not None:
             self._env.task.random.seed(seed)
             self._env.task._random = np.random.RandomState(seed)
-        seed=None
         if self.task == "transfer_cube":
              BOX_POSE.append(sample_box_pose(seed))  # used in sim reset
         elif self.task == "insertion":
